@@ -5,16 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
 public class Person {
     private long id;
-    private String name;
-    private Rol rol;
-    private String identification;
-    private String address;
-    private String phoneNumber;
-    private String email;
+    @Setter private String name;
+    @Setter private Rol rol;
+    @Setter private String identification;
+    @Setter private String address;
+    @Setter private String phoneNumber;
+    @Setter private String email;
 }

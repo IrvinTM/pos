@@ -6,27 +6,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 public class Product {
     private long id;
-    private String name;
-    private long code;
-    private String barCode;
-    private String measurementUnit;
-    private Category category;
-    private boolean isActive;
-    private boolean isAgeRestricted;
-    private String description;
-    private String image;
-    private int cost;
-    private List<Tax> taxes;
-    private boolean priceIncludesTaxes;
-    private boolean allowPriceChange;
-    private int noTaxIncludedPrice;
-    private int TaxIncludedPrice;
-    private int profitMargin;
-    private int salesPrice;
+    @Setter private String name;
+    @Setter private long code;
+    @Setter private String barCode;
+    @Setter private String measurementUnit;
+    @Setter private Category category;
+    @Setter private boolean isActive;
+    @Setter private boolean isAgeRestricted;
+    @Setter private String description;
+    @Setter private String image;
+    @Setter private int cost;
+    @Setter private List<Tax> taxes;
+    @Setter private boolean priceIncludesTaxes;
+    @Setter private boolean allowPriceChange;
+    @Setter private int noTaxIncludedPrice;
+    @Setter private int taxIncludedPrice;
+    @Setter private int profitMargin;
+    @Setter private int salesPrice;
+    @Setter private int stock;
 }
