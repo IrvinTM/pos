@@ -1,32 +1,236 @@
 package com.irvin.pos.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.util.List;
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @Setter private String name;
-    @Setter private long code;
-    @Setter private String barCode;
-    @Setter private String measurementUnit;
-    @Setter private Category category;
-    @Setter private boolean isActive;
-    @Setter private boolean isAgeRestricted;
-    @Setter private String description;
-    @Setter private String image;
-    @Setter private int cost;
-    @Setter private List<Tax> taxes;
-    @Setter private boolean priceIncludesTaxes;
-    @Setter private boolean allowPriceChange;
-    @Setter private int noTaxIncludedPrice;
-    @Setter private int taxIncludedPrice;
-    @Setter private int profitMargin;
-    @Setter private int salesPrice;
-    @Setter private int stock;
+    private String name;
+    private String code;
+    private String barCode;
+    private String measurementUnit;
+    private Category category;
+    private boolean isActive;
+    private boolean isAgeRestricted;
+    private String description;
+    private String image;
+    private long cost;
+    @ElementCollection(targetClass = Tax.class)
+    @CollectionTable(name = "taxes", joinColumns = @JoinColumn(name = "product_id"))
+    private List<Tax> taxes;
+    private boolean priceIncludesTaxes;
+    private boolean allowPriceChange;
+    private long noTaxIncludedPrice;
+    private long taxIncludedPrice;
+    private long profitMargin;
+    private long salesPrice;
+    private long stock;
+
+    public Product() {
+    }
+
+    public Product(long id, String name, String code, String barCode, String measurementUnit, Category category,
+            boolean isActive, boolean isAgeRestricted, String description, String image, long cost, List<Tax> taxes,
+            boolean priceIncludesTaxes, boolean allowPriceChange, long noTaxIncludedPrice, long taxIncludedPrice,
+            long profitMargin, long salesPrice, long stock) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.barCode = barCode;
+        this.measurementUnit = measurementUnit;
+        this.category = category;
+        this.isActive = isActive;
+        this.isAgeRestricted = isAgeRestricted;
+        this.description = description;
+        this.image = image;
+        this.cost = cost;
+        this.taxes = taxes;
+        this.priceIncludesTaxes = priceIncludesTaxes;
+        this.allowPriceChange = allowPriceChange;
+        this.noTaxIncludedPrice = noTaxIncludedPrice;
+        this.taxIncludedPrice = taxIncludedPrice;
+        this.profitMargin = profitMargin;
+        this.salesPrice = salesPrice;
+        this.stock = 0;
+    }
+
+    public Product(Product product) {
+        this.name = product.getName();
+        this.code = product.getCode();
+        this.barCode = product.getBarCode();
+        this.measurementUnit = product.getMeasurementUnit();
+        this.category = product.getCategory();
+        this.isActive = product.isActive();
+        this.isAgeRestricted = product.isAgeRestricted();
+        this.description = product.getDescription();
+        this.image = product.getImage();
+        this.cost = product.getCost();
+        this.taxes = product.getTaxes();
+        this.priceIncludesTaxes = product.priceIncludesTaxes();
+        this.allowPriceChange = product.allowPriceChange();
+        this.noTaxIncludedPrice = product.getNoTaxIncludedPrice();
+        this.taxIncludedPrice = product.getTaxIncludedPrice();
+        this.profitMargin = product.getProfitMargin();
+        this.salesPrice = product.getSalesPrice();
+        this.stock = 0;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public String getMeasurementUnit() {
+        return measurementUnit;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isAgeRestricted() {
+        return isAgeRestricted;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public long getCost() {
+        return cost;
+    }
+
+    public List<Tax> getTaxes() {
+        return taxes;
+    }
+
+    public boolean priceIncludesTaxes() {
+        return priceIncludesTaxes;
+    }
+
+    public boolean allowPriceChange() {
+        return allowPriceChange;
+    }
+
+    public long getNoTaxIncludedPrice() {
+        return noTaxIncludedPrice;
+    }
+
+    public long getTaxIncludedPrice() {
+        return taxIncludedPrice;
+    }
+
+    public long getProfitMargin() {
+        return profitMargin;
+    }
+
+    public long getSalesPrice() {
+        return salesPrice;
+    }
+
+    public long getStock() {
+        return stock;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
+
+    public void setMeasurementUnit(String measurementUnit) {
+        this.measurementUnit = measurementUnit;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public void setAgeRestricted(boolean isAgeRestricted) {
+        this.isAgeRestricted = isAgeRestricted;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setCost(long cost) {
+        this.cost = cost;
+    }
+
+    public void setTaxes(List<Tax> taxes) {
+        this.taxes = taxes;
+    }
+
+    public void setPriceIncludesTaxes(boolean priceIncludesTaxes) {
+        this.priceIncludesTaxes = priceIncludesTaxes;
+    }
+
+    public void setAllowPriceChange(boolean allowPriceChange) {
+        this.allowPriceChange = allowPriceChange;
+    }
+
+    public void setNoTaxIncludedPrice(long noTaxIncludedPrice) {
+        this.noTaxIncludedPrice = noTaxIncludedPrice;
+    }
+
+    public void setTaxIncludedPrice(long taxIncludedPrice) {
+        this.taxIncludedPrice = taxIncludedPrice;
+    }
+
+    public void setProfitMargin(long profitMargin) {
+        this.profitMargin = profitMargin;
+    }
+
+    public void setSalesPrice(long salesPrice) {
+        this.salesPrice = salesPrice;
+    }
+
+    public void setStock(long stock) {
+        this.stock = stock;
+    }
+
 }

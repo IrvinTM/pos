@@ -6,14 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-public class Sale {
+public class Transaction {
     private long id;
-    @Setter private List<Product> products;
+    @Setter private int amount;
     @Setter private LocalDateTime date;
-    @Setter private int discount;
+    @Setter private TransactionType transactionType;
 }

@@ -7,13 +7,12 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
-
 public class Stock {
-    @Getter private long id;
-    @Getter @Setter private List<Product> products;
-    @Getter @Setter private int Quantity;
+    private long id;
+    @Setter private List<Product> products;
+    @Setter private int Quantity;
     //get the created and modified from the db maybe ?
 }
