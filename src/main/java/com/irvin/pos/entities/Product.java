@@ -1,14 +1,13 @@
 package com.irvin.pos.entities;
 
 import java.util.List;
-
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Product {
@@ -19,14 +18,16 @@ public class Product {
     private String code;
     private String barCode;
     private String measurementUnit;
-    private Category category;
+    @ManyToMany
+    @JoinTable(name = "product_categories", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
     private boolean isActive;
     private boolean isAgeRestricted;
     private String description;
     private String image;
     private long cost;
-    @ElementCollection(targetClass = Tax.class)
-    @CollectionTable(name = "taxes", joinColumns = @JoinColumn(name = "product_id"))
+    @ManyToMany
+    @JoinTable(name = "product_tax", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "tax_id"))
     private List<Tax> taxes;
     private boolean priceIncludesTaxes;
     private boolean allowPriceChange;
@@ -39,7 +40,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, String name, String code, String barCode, String measurementUnit, Category category,
+    public Product(long id, String name, String code, String barCode, String measurementUnit, List<Category> categories,
             boolean isActive, boolean isAgeRestricted, String description, String image, long cost, List<Tax> taxes,
             boolean priceIncludesTaxes, boolean allowPriceChange, long noTaxIncludedPrice, long taxIncludedPrice,
             long profitMargin, long salesPrice, long stock) {
@@ -48,7 +49,7 @@ public class Product {
         this.code = code;
         this.barCode = barCode;
         this.measurementUnit = measurementUnit;
-        this.category = category;
+        this.categories = categories;
         this.isActive = isActive;
         this.isAgeRestricted = isAgeRestricted;
         this.description = description;
@@ -69,7 +70,7 @@ public class Product {
         this.code = product.getCode();
         this.barCode = product.getBarCode();
         this.measurementUnit = product.getMeasurementUnit();
-        this.category = product.getCategory();
+        this.categories = product.getCategories();
         this.isActive = product.isActive();
         this.isAgeRestricted = product.isAgeRestricted();
         this.description = product.getDescription();
@@ -105,8 +106,8 @@ public class Product {
         return measurementUnit;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
     public boolean isActive() {
@@ -177,8 +178,8 @@ public class Product {
         this.measurementUnit = measurementUnit;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategory(List<Category> categories) {
+        this.categories = categories;
     }
 
     public void setActive(boolean isActive) {
@@ -232,5 +233,4 @@ public class Product {
     public void setStock(long stock) {
         this.stock = stock;
     }
-
 }

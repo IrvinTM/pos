@@ -1,6 +1,12 @@
 package com.irvin.pos.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
 public class Category {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
 
