@@ -9,40 +9,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.irvin.pos.entities.Product;
+import com.irvin.pos.entities.Person;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
-import com.irvin.pos.services.ProductService;
+import com.irvin.pos.services.PersonService;
 
-@RestController
-@RequestMapping("/api/products")
-public class ProductController {
-
+@RestController("/api/people")
+public class PersonController {
     @Autowired
-    private ProductService productService;
-
+    private PersonService personService;
+    
     @GetMapping
-    public Page<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public Page<Person> getAllPeople(){
+    return personService.getAllPeople();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) throws PropertyAlreadyExistException {
-        Product p = productService.createProduct(product);
-        return ResponseEntity.ok(p);
+    public ResponseEntity<Person> addPerson(@RequestBody Person person) throws PropertyAlreadyExistException{
+        return ResponseEntity.ok(person);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Product> deleteProduct(@RequestParam long id) {
-        productService.deleteProduct(id);
+    public ResponseEntity<Void> deletePerson(@RequestParam long id){
+        personService.deletePerson(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
-        Product p = productService.updateProduct(product);
-        return ResponseEntity.ok(p);
+    public ResponseEntity<Person> updatePerson(@RequestBody Person person){
+        return ResponseEntity.ok(personService.updatePerson(person));
     }
 }
