@@ -14,7 +14,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product CreateOrUpdateProduct(Product product) throws PropertyAlreadyExistException {
+    public Product createProduct(Product product) throws PropertyAlreadyExistException {
         if (productRepository.getByCode(product.getCode()) != null
                 | productRepository.getByBarcode(product.getBarCode()) != null) {
             throw new PropertyAlreadyExistException("code", String.valueOf(product.getCode()));
@@ -22,11 +22,15 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void deleteProduct(Product product) throws IllegalArgumentException {
-        productRepository.delete(product);
+    public Product updateProduct(Product product) {
+        return productRepository.save(product);
     }
 
-    // First page only
+    public void deleteProduct(long id) throws IllegalArgumentException {
+        productRepository.deleteById(id);
+    }
+
+    // TODO pagination
     public Page<Product> getAllProducts() {
         return productRepository.findAll(PageRequest.of(0, 10));
     }
