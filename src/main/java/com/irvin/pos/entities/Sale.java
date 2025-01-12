@@ -6,24 +6,32 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+    @ManyToOne
+    @JoinTable(name = "products", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
     private Instant date;
     private int discount;
+    private long total;
+    private CashRegister cashRegister;
 
     public Sale(){
         this.date = Instant.now();
     }
 
-    public Sale(List<Product> products, Instant date, int discount ){
+    public Sale(List<Product> products, Instant date, int discount, long total ){
         this.products = products;
         this.date = Instant.now();
         this.discount = discount;
+	this.total = total;
     }
 
     public Sale(Sale sale){
@@ -49,5 +57,17 @@ public class Sale {
 	}
 	public void setDiscount(int discount) {
 		this.discount = discount;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
+	}
+
+	public long getTotal() {
+		return total;
+	}
+
+	public void setTotal(long total) {
+		this.total = total;
 	}
 }

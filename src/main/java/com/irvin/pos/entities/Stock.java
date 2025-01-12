@@ -11,8 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Stock {
+
     private long id;
     @Setter private List<Product> products;
-    @Setter private int Quantity;
+    @Setter private long total;
     //get the created and modified from the db maybe ?
 }
