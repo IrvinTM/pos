@@ -1,14 +1,19 @@
 package com.irvin.pos.entities;
 
+
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Category {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
+    private List<Product> products;
 
     public Category() {
     }

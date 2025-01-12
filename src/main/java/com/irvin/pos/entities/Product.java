@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -35,7 +36,13 @@ public class Product {
     private long taxIncludedPrice;
     private long profitMargin;
     private long salesPrice;
-    private long stock;
+    private long available;
+    @ManyToOne
+    @JoinColumn(name = "sale_ id")
+    private Sale sale;
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 
     public Product() {
     }
@@ -43,7 +50,7 @@ public class Product {
     public Product(long id, String name, String code, String barCode, String measurementUnit, List<Category> categories,
             boolean isActive, boolean isAgeRestricted, String description, String image, long cost, List<Tax> taxes,
             boolean priceIncludesTaxes, boolean allowPriceChange, long noTaxIncludedPrice, long taxIncludedPrice,
-            long profitMargin, long salesPrice, long stock) {
+            long profitMargin, long salesPrice, long available) {
         this.id = id;
         this.name = name;
         this.code = code;
@@ -62,7 +69,7 @@ public class Product {
         this.taxIncludedPrice = taxIncludedPrice;
         this.profitMargin = profitMargin;
         this.salesPrice = salesPrice;
-        this.stock = 0;
+        this.available = 0;
     }
 
     public Product(Product product) {
@@ -83,7 +90,7 @@ public class Product {
         this.taxIncludedPrice = product.getTaxIncludedPrice();
         this.profitMargin = product.getProfitMargin();
         this.salesPrice = product.getSalesPrice();
-        this.stock = 0;
+        this.available = 0;
     }
 
     public long getId() {
@@ -158,8 +165,8 @@ public class Product {
         return salesPrice;
     }
 
-    public long getStock() {
-        return stock;
+    public long getAvailable() {
+        return available;
     }
 
     public void setName(String name) {
@@ -230,7 +237,7 @@ public class Product {
         this.salesPrice = salesPrice;
     }
 
-    public void setStock(long stock) {
-        this.stock = stock;
+    public void setStock(long available) {
+        this.available = available;
     }
 }

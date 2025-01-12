@@ -15,9 +15,9 @@ public class CashRegister {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	private long balance;
-	@OneToMany
-	@JoinTable(name = "cash_register_transactions", joinColumns = @JoinColumn(name = "cash_register_id"), inverseJoinColumns = @JoinColumn(name = "transaction_id"))
+	@OneToMany(mappedBy = "cashRegister")
 	private List<Transaction> transactions;
+	@OneToMany(mappedBy = "cashRegister")
 	private List<Sale> sales;
 
 

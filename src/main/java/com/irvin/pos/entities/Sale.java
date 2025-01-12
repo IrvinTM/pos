@@ -9,19 +9,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @ManyToOne
-    @JoinTable(name = "products", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @OneToMany(mappedBy = "product")
     private List<Product> products;
     private Instant date;
     private int discount;
     private long total;
+    @ManyToOne
+    @JoinColumn(name = "cash_register_id")
     private CashRegister cashRegister;
+    @ManyToOne
+    @JoinColumn(name = "customer")
+    private Customer customer;
 
     public Sale(){
         this.date = Instant.now();

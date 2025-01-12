@@ -1,18 +1,50 @@
 package com.irvin.pos.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.time.Instant;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-import java.time.LocalDateTime;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
 public class Transaction {
     private long id;
-    @Setter private int amount;
-    @Setter private LocalDateTime date;
-    @Setter private TransactionType transactionType;
+    private long amount;
+    private Instant date;
+    private TransactionType transactionType;
+    @ManyToOne
+    @JoinColumn(name = "cash_register_id")
+    private CashRegister cashRegister;
+
+    public Transaction(){
+
+    }
+    public Transaction(long amount,  TransactionType transactionType, CashRegister cashRegister){
+	this.amount = amount;
+	this.date = Instant.now();
+	this.transactionType = transactionType;
+	this.cashRegister = cashRegister;
+    }
+
+	public long getId() {
+		return id;
+	}
+	public long getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public Instant getDate() {
+		return date;
+	}
+	public TransactionType getTransactionType() {
+		return transactionType;
+	}
+	public void setTransactionType(TransactionType transactionType) {
+		this.transactionType = transactionType;
+	}
+	public CashRegister getCashRegister() {
+		return cashRegister;
+	}
+	public void setCashRegister(CashRegister cashRegister) {
+		this.cashRegister = cashRegister;
+	}
 }
