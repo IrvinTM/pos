@@ -20,7 +20,7 @@ public class Product {
     private String barCode;
     private String measurementUnit;
     @ManyToMany
-    @JoinTable(name = "categories", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "product_categories", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
     private boolean isActive;
     private boolean isAgeRestricted;
@@ -28,7 +28,7 @@ public class Product {
     private String image;
     private long cost;
     @ManyToMany
-    @JoinTable(name = "taxes", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "tax_id"))
+    @JoinTable(name = "product_taxes", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "tax_id"))
     private List<Tax> taxes;
     private boolean priceIncludesTaxes;
     private boolean allowPriceChange;
