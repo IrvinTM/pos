@@ -25,6 +25,8 @@ public class CompanyService {
             return companyRepository.save(existing);
         } else {
             Company newCompany = new Company(1L, company.getName(), company.getAddress(), company.getPhoneNumber(),
+
+
                     company.getEmail(), company.getLogo());
             return companyRepository.save(newCompany);
         }

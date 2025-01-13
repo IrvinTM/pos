@@ -1,5 +1,5 @@
 spring.application.name=reditus
-spring.datasource.url=jdbc:postgresql://ep-odd-fog-a4mek6ae.us-east-1.pg.koyeb.app/koyebdb?user=admin&password=kICHa9PqJ2Av
+spring.datasource.url=jdbc:postgresql://mydatabasecredentials
 spring.datasource.driver-class-name=org.postgresql.Driver
 
 # Show or not log for each sql query

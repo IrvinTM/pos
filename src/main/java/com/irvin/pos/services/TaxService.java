@@ -7,9 +7,6 @@ import com.irvin.pos.entities.Tax;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
 import com.irvin.pos.repositories.TaxRepository;
 
-/**
- * TaxService
- */
 public class TaxService {
 
     private TaxRepository taxRepository;

@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -16,7 +15,7 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "sale")
     private List<Product> products;
     private Instant date;
     private int discount;

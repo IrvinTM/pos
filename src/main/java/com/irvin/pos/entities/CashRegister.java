@@ -2,16 +2,15 @@ package com.irvin.pos.entities;
 
 import java.util.List;
 
-import com.irvin.pos.repositories.TransactionRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class CashRegister {
+	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	private long balance;

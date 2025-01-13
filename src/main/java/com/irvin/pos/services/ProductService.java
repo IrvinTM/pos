@@ -17,7 +17,7 @@ public class ProductService {
         if (productRepository.getByCode(product.getCode()) != null) {
             throw new PropertyAlreadyExistException("code", String.valueOf(product.getCode()));
         }
-        if (productRepository.getByBarcode(product.getBarCode()) != null) {
+        if (productRepository.getByBarCode(product.getBarCode()) != null) {
             throw new PropertyAlreadyExistException("bar_code", product.getBarCode());
         }
         return productRepository.save(product);
