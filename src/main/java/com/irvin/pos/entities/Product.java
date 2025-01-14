@@ -38,9 +38,6 @@ public class Product {
     private long salesPrice;
     private long available;
     @ManyToOne
-    @JoinColumn(name = "sale_ id")
-    private Sale sale;
-    @ManyToOne
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
@@ -185,7 +182,7 @@ public class Product {
         this.measurementUnit = measurementUnit;
     }
 
-    public void setCategory(List<Category> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
@@ -240,4 +237,25 @@ public class Product {
     public void setStock(long available) {
         this.available = available;
     }
+
+	public boolean isPriceIncludesTaxes() {
+		return priceIncludesTaxes;
+	}
+
+	public boolean isAllowPriceChange() {
+		return allowPriceChange;
+	}
+
+	public void setAvailable(long available) {
+		this.available = available;
+	}
+
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+    
 }

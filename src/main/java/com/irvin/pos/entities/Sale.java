@@ -2,6 +2,7 @@ package com.irvin.pos.entities;
 
 import java.time.Instant;
 import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @OneToMany(mappedBy = "sale")
-    private List<Product> products;
+    private List<SaleItem> items;
     private Instant date;
     private int discount;
     private long total;
@@ -31,15 +32,15 @@ public class Sale {
         this.date = Instant.now();
     }
 
-    public Sale(List<Product> products, Instant date, int discount, long total ){
-        this.products = products;
+    public Sale(List<SaleItem> items, Instant date, int discount, long total ){
+        this.items = items;
         this.date = Instant.now();
         this.discount = discount;
 	this.total = total;
     }
 
     public Sale(Sale sale){
-        this.products = sale.getProducts();
+        this.items = sale.getItems();
         this.date = Instant.now();
         this.discount = sale.getDiscount();
     }
@@ -47,11 +48,11 @@ public class Sale {
 	public long getId() {
 		return id;
 	}
-	public List<Product> getProducts() {
-		return products;
+	public List<SaleItem> getItems() {
+		return items;
 	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setItems(List<SaleItem> items) {
+		this.items = items;
 	}
 	public Instant getDate() {
 		return date;

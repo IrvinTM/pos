@@ -1,33 +1,33 @@
 package com.irvin.pos.utils;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class ApiError {
+    private Instant timestamp;
     private int status;
-    private String message;
+    private String error;
     private String path;
-    private LocalDateTime timestamp;
 
-    public ApiError(int status, String message, String path) {
+    public ApiError(int status, String error, String path) {
         this.status = status;
-        this.message = message;
+        this.error = error;
         this.path = path;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = Instant.now();
     }
 
     public int getStatus() {
         return status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getError() {
+        return error;
     }
 
     public String getPath() {
         return path;
     }
 
-    public LocalDateTime getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 }
