@@ -71,6 +71,7 @@ public class ProductService {
             /*Product newProduct = ObjectMapper.dtoToProduct(productDTO, categories, taxes);*/
             Optional<Product> pr = productRepository.findById(productDTO.getId());
             if(pr.isPresent()){
+                //i may need a better way to do this
                 Product prod = pr.get();
                 prod.setName(productDTO.getName());
                 prod.setCode(productDTO.getCode());
