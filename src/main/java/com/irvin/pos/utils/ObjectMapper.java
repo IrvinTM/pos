@@ -3,6 +3,7 @@ package com.irvin.pos.utils;
 import java.util.ArrayList;
 import java.util.List;
 import com.irvin.pos.dtos.ProductDTO;
+import com.irvin.pos.dtos.TaxDTO;
 import com.irvin.pos.entities.Category;
 import com.irvin.pos.entities.Product;
 import com.irvin.pos.entities.Tax;
@@ -56,5 +57,14 @@ public class ObjectMapper {
         productDTO.setProfitMargin(product.getProfitMargin());
         productDTO.setSalesPrice(product.getSalesPrice());
         return productDTO;
+    }
+
+    public static TaxDTO taxToDTO(Tax tax){
+        TaxDTO dto = new TaxDTO();
+        dto.setId(tax.getId());
+        dto.setName(tax.getName());
+        dto.setCode(tax.getCode());
+        dto.setPercentage(tax.getPercentage());
+        return dto;
     }
 }
