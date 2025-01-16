@@ -3,45 +3,64 @@ package com.irvin.pos.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import com.irvin.pos.dtos.CustomPageDTO;
+import com.irvin.pos.dtos.TaxDTO;
 import com.irvin.pos.entities.Tax;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
 import com.irvin.pos.repositories.TaxRepository;
+import com.irvin.pos.utils.CustomPage;
+import com.irvin.pos.utils.ObjectMapper;
 
-//TODO change to the dto for Tax
 @Service
 public class TaxService {
 
     @Autowired
     private TaxRepository taxRepository;
 
-    public Tax createTax(Tax tax) throws PropertyAlreadyExistException{
-        if (taxRepository.getByName(tax.getName()) != null) {
-            throw new PropertyAlreadyExistException("name", tax.getName());
-        }else if(taxRepository.getByCode(tax.getCode()) != null){
-            throw new PropertyAlreadyExistException("code", tax.getCode());
+    public TaxDTO createTax(TaxDTO taxDTO) throws PropertyAlreadyExistException{
+        if (taxRepository.getByName(taxDTO.getName()) != null) {
+            throw new PropertyAlreadyExistException("name", taxDTO.getName());
+        }else if(taxRepository.getByCode(taxDTO.getCode()) != null){
+            throw new PropertyAlreadyExistException("code", taxDTO.getCode());
         }
-        return taxRepository.save(tax);
-    }
-
-    public CustomPageDTO<Tax> getAllTaxes(){
-        CustomPageDTO<Tax> page =
-            new CustomPageDTO<>(
-                    taxRepository.findAll(PageRequest.of(0, 10))
-                    );
-        return page;
-    }
-
-    public Tax getTaxByID(long id){
-        return taxRepository.getReferenceById(id);
-    }
-
-    public Tax updateTax(Tax tax)throws Exception{
-        Optional<Tax> t = taxRepository.findById(tax.getId());
+        Tax taxFromDb = new Tax();
+        Optional<Tax> t = taxRepository.findById(taxDTO.getId());
         if (t.isPresent()) {
-            return t.get();
+            taxFromDb = t.get();
+            }
+        Tax newTax = ObjectMapper.dtoToTax(taxDTO, taxFromDb);
+        return ObjectMapper.taxToDTO(taxRepository.save(newTax));
+    }
+
+    public CustomPageDTO<TaxDTO> getAllTaxes(){
+        CustomPageDTO<TaxDTO> page =
+            new CustomPageDTO<>();
+        Page<Tax> p = taxRepository.findAll(PageRequest.of(0, 10));
+            p.forEach(tax -> page.getContent().add(ObjectMapper.taxToDTO(tax)));
+        CustomPage pageDetails = new CustomPage(p.getTotalElements(), p.getTotalPages(), p.getNumber(), p.getSize());
+        page.setCustomPage(pageDetails);
+        return page;
+
+    }
+
+    public TaxDTO getTaxByID(long id) throws Exception{
+        Tax tax = taxRepository.getReferenceById(id);
+        if (tax != null) {
+            return ObjectMapper.taxToDTO(tax);
+    }
+    throw new Exception("tax not found");
+    }
+
+    public TaxDTO updateTax(TaxDTO taxDTO)throws Exception{
+        Optional<Tax> t = taxRepository.findById(taxDTO.getId());
+        if (t.isPresent()) {
+            Tax taxFromDb = t.get();
+            Tax newTax = ObjectMapper.dtoToTax(taxDTO, taxFromDb);
+            return ObjectMapper.taxToDTO(taxRepository.save(newTax));
         }else{
             throw new Exception("tax not found");
         }

@@ -67,4 +67,10 @@ public class ObjectMapper {
         dto.setPercentage(tax.getPercentage());
         return dto;
     }
+    public static Tax dtoToTax(TaxDTO taxDTO, Tax tax){
+        tax.setName(taxDTO.getName());
+        tax.setCode(taxDTO.getCode());
+        tax.setPercentage(taxDTO.getPercentage());
+        return tax;
+    }
 }

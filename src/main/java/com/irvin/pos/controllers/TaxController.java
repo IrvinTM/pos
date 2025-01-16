@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.irvin.pos.dtos.CustomPageDTO;
+import com.irvin.pos.dtos.TaxDTO;
 import com.irvin.pos.entities.Tax;
 import com.irvin.pos.services.TaxService;
 
@@ -23,18 +24,18 @@ public class TaxController {
     private TaxService taxService;
 
     @GetMapping
-    public CustomPageDTO<Tax> getAll(){
+    public CustomPageDTO<TaxDTO> getAll(){
         return taxService.getAllTaxes();
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Tax> CreateTax(@RequestBody Tax tax)throws Exception{
+    public ResponseEntity<TaxDTO> CreateTax(@RequestBody TaxDTO taxDTO)throws Exception{
         return ResponseEntity.ok(
-                taxService.createTax(tax));
+                taxService.createTax(taxDTO));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Tax> updateTax(@RequestBody Tax tax) throws Exception{
+    public ResponseEntity<TaxDTO> updateTax(@RequestBody TaxDTO tax) throws Exception{
         return ResponseEntity.ok(
                 taxService.updateTax(tax)
                 );
