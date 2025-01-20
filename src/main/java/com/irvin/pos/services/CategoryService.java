@@ -1,12 +1,19 @@
 package com.irvin.pos.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import com.irvin.pos.dtos.CategoryDTO;
+import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.entities.Category;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
 import com.irvin.pos.repositories.CategoryRepository;
+import com.irvin.pos.utils.CustomPage;
+import com.irvin.pos.utils.ObjectMapper;
 
 @Service
 public class CategoryService {
@@ -14,26 +21,42 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Category addCategory(Category category) throws PropertyAlreadyExistException{
-        if (categoryRepository.findByName(category.getName())!= null) {
-            throw new PropertyAlreadyExistException("name", category.getName());
+    public CategoryDTO addcategoryDTO(CategoryDTO categoryDTO) throws PropertyAlreadyExistException{
+        if (categoryRepository.findByName(categoryDTO.getName())!= null) {
+            throw new PropertyAlreadyExistException("name", categoryDTO.getName());
         }
-            return categoryRepository.save(category);
+        Category cat = ObjectMapper.dtoToCategory(categoryDTO);
+        return ObjectMapper.categoryToDTO(categoryRepository.save(cat));
     }
-    //TODO proper pagination
-    public Page<Category> getAllCategories(){
-        return categoryRepository.findAll(PageRequest.of(0, 10));
+    public CustomPageDTO<CategoryDTO> getAllCategories(){
+        Page<Category> categories = categoryRepository.findAll(PageRequest.of(0, 10));
+        CustomPageDTO<CategoryDTO> myPage = new CustomPageDTO<>();
+        categories.forEach((cat) -> {
+            CategoryDTO c = ObjectMapper.categoryToDTO(cat);
+            myPage.addContent(c);
+            myPage.setCustomPage(new CustomPage(categories.getTotalElements(),
+                        categories.getTotalPages(), categories.getNumber(), categories.getSize()));
+        });
+        
+        
+        return myPage;
     }
 
     //TODO create a proper exception
-    public Category updateCategorie(Category category){
-        if (categoryRepository.findById(category.getId()) != null) {
-            throw new IllegalStateException("Product doesnt exist");
+    public CategoryDTO updateCategorie(CategoryDTO categoryDTO){
+        if (categoryRepository.findById(categoryDTO.getId()) != null) {
+            throw new IllegalStateException("Category doesnt exist");
         }
-        return categoryRepository.save(category);
+        Optional<Category> catFromDB = categoryRepository.findById(categoryDTO.getId());
+        if(catFromDB.isPresent()){
+            Category cat = catFromDB.get();
+            cat.setName(categoryDTO.getName());
+        return ObjectMapper.categoryToDTO(categoryRepository.save(cat));
+        }
+        throw new IllegalStateException("Category doesnt exist");
     }
 
-    public void deleteCategory(long id){
+    public void deletecategoryDTO(long id){
         categoryRepository.deleteById(id);
     }
 

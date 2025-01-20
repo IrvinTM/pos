@@ -2,6 +2,8 @@ package com.irvin.pos.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.ProductDTO;
 import com.irvin.pos.dtos.TaxDTO;
 import com.irvin.pos.entities.Category;
@@ -72,5 +74,13 @@ public class ObjectMapper {
         tax.setCode(taxDTO.getCode());
         tax.setPercentage(taxDTO.getPercentage());
         return tax;
+    }
+    
+    public static CategoryDTO categoryToDTO(Category category){
+    return new CategoryDTO(category.getId(), category.getName());
+    }
+    public  static Category dtoToCategory(CategoryDTO categoryDTO){
+        //TODO may need to add the list of products  List<long> productsIds
+        return new Category(categoryDTO.getId(), categoryDTO.getName());
     }
 }
