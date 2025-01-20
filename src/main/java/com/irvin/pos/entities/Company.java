@@ -14,7 +14,7 @@ public class Company {
     private String logo;
 
     // asigno el id ya que solo habra una compania
-    public Company(long id, String name, String address, String phoneNumber, String email, String logo) {
+    public Company(String name, String address, String phoneNumber, String email, String logo) {
         this.id = 1;
         this.name = name;
         this.address = address;

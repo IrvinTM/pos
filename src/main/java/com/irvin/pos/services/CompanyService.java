@@ -24,7 +24,7 @@ public class CompanyService {
             existing.setLogo(company.getLogo());
             return companyRepository.save(existing);
         } else {
-            Company newCompany = new Company(1L, company.getName(), company.getAddress(), company.getPhoneNumber(),
+            Company newCompany = new Company(company.getName(), company.getAddress(), company.getPhoneNumber(),
 
 
                     company.getEmail(), company.getLogo());

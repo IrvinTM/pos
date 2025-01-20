@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.TaxDTO;
-import com.irvin.pos.entities.Tax;
 import com.irvin.pos.services.TaxService;
 
 @RestController

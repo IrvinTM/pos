@@ -28,10 +28,6 @@ public class TaxService {
             throw new PropertyAlreadyExistException("code", taxDTO.getCode());
         }
         Tax taxFromDb = new Tax();
-        Optional<Tax> t = taxRepository.findById(taxDTO.getId());
-        if (t.isPresent()) {
-            taxFromDb = t.get();
-            }
         Tax newTax = ObjectMapper.dtoToTax(taxDTO, taxFromDb);
         return ObjectMapper.taxToDTO(taxRepository.save(newTax));
     }
