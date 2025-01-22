@@ -21,7 +21,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public CategoryDTO addcategoryDTO(CategoryDTO categoryDTO) throws PropertyAlreadyExistException{
+    public CategoryDTO addCategory(CategoryDTO categoryDTO) throws PropertyAlreadyExistException{
         if (categoryRepository.findByName(categoryDTO.getName())!= null) {
             throw new PropertyAlreadyExistException("name", categoryDTO.getName());
         }
@@ -44,7 +44,7 @@ public class CategoryService {
 
     //TODO create a proper exception
     public CategoryDTO updateCategorie(CategoryDTO categoryDTO){
-        if (categoryRepository.findById(categoryDTO.getId()) != null) {
+        if (categoryRepository.findById(categoryDTO.getId()) == null) {
             throw new IllegalStateException("Category doesnt exist");
         }
         Optional<Category> catFromDB = categoryRepository.findById(categoryDTO.getId());
@@ -56,7 +56,7 @@ public class CategoryService {
         throw new IllegalStateException("Category doesnt exist");
     }
 
-    public void deletecategoryDTO(long id){
+    public void deleteCategory(long id){
         categoryRepository.deleteById(id);
     }
 
