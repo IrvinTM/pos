@@ -1,7 +1,6 @@
 package com.irvin.pos.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,12 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.CustomPageDTO;
-import com.irvin.pos.entities.Category;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
 import com.irvin.pos.services.CategoryService;
 

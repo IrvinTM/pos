@@ -79,8 +79,8 @@ public class ObjectMapper {
     public static CategoryDTO categoryToDTO(Category category){
     return new CategoryDTO(category.getId(), category.getName());
     }
-    public  static Category dtoToCategory(CategoryDTO categoryDTO){
-        //TODO may need to add the list of products  List<long> productsIds
+
+    public  static Category dtoToCategory(CategoryDTO categoryDTO, List<Product> product){
         return new Category(categoryDTO.getId(), categoryDTO.getName());
     }
 }

@@ -21,7 +21,7 @@ public class SaleController {
 
     @Autowired
     private SaleService saleService;
-    
+
     @PostMapping("/create")
     public ResponseEntity<Sale> addSale(@RequestBody Sale sale){
         Sale s = saleService.addSale(sale);

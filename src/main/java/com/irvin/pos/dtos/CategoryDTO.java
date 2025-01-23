@@ -1,10 +1,12 @@
 package com.irvin.pos.dtos;
 
+import java.util.List;
 
 public class CategoryDTO {
 
     private long id;
     private String name;
+    private List<Long> productIDs;
 
     public CategoryDTO(){}
     public CategoryDTO(long id, String name){
@@ -27,5 +29,11 @@ public class CategoryDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public List<Long> getProductIDs() {
+		return productIDs;
+	}
+	public void setProductIDs(List<Long> productIDs) {
+		this.productIDs = productIDs;
 	}
 }

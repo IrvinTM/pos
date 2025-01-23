@@ -14,9 +14,6 @@ public class SaleItem {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	@ManyToOne
-	@JoinColumn(name = "sale_id")
-	private Sale sale;
-	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
 	private int quantity;
@@ -24,12 +21,6 @@ public class SaleItem {
 
 	public long getId() {
 		return id;
-	}
-	public Sale getSale() {
-		return sale;
-	}
-	public void setSale(Sale sale) {
-		this.sale = sale;
 	}
 	public Product getProduct() {
 		return product;
@@ -49,5 +40,4 @@ public class SaleItem {
 	public void setPriceAtSale(long priceAtSale) {
 		this.priceAtSale = priceAtSale;
 	}
-
 }

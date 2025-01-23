@@ -3,20 +3,22 @@ package com.irvin.pos.entities;
 import java.time.Instant;
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @OneToMany(mappedBy = "sale")
+    @ElementCollection
+    @CollectionTable(name = "sale_items")
     private List<SaleItem> items;
     private Instant date;
     private int discount;
@@ -29,19 +31,18 @@ public class Sale {
     private Customer customer;
 
     public Sale(){
-        this.date = Instant.now();
     }
 
     public Sale(List<SaleItem> items, Instant date, int discount, long total ){
         this.items = items;
-        this.date = Instant.now();
+        this.date = date;
         this.discount = discount;
 	this.total = total;
     }
 
     public Sale(Sale sale){
         this.items = sale.getItems();
-        this.date = Instant.now();
+        this.date = sale.getDate();
         this.discount = sale.getDiscount();
     }
 
