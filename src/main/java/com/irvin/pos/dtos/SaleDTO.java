@@ -3,8 +3,6 @@ package com.irvin.pos.dtos;
 import java.time.Instant;
 import java.util.List;
 
-import com.irvin.pos.entities.CashRegister;
-import com.irvin.pos.entities.Customer;
 import com.irvin.pos.entities.SaleItem;
 
 public class SaleDTO {
@@ -70,20 +68,20 @@ public class SaleDTO {
 		this.total = total;
 	}
 
-	public CashRegister getCashRegister() {
-		return cashRegister;
+	public Long getCashRegisterID() {
+		return cashRegisterID;
 	}
 
-	public void setCashRegister(CashRegister cashRegister) {
-		this.cashRegister = cashRegister;
+	public void setCashRegisterID(Long cashRegisterID) {
+		this.cashRegisterID = cashRegisterID;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Long getCustomerID() {
+		return customerID;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomer(Long customerID) {
+		this.customerID = customerID;
 	}
 }
 

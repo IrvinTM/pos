@@ -5,9 +5,13 @@ import java.util.List;
 
 import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.ProductDTO;
+import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.dtos.TaxDTO;
+import com.irvin.pos.entities.CashRegister;
 import com.irvin.pos.entities.Category;
+import com.irvin.pos.entities.Customer;
 import com.irvin.pos.entities.Product;
+import com.irvin.pos.entities.Sale;
 import com.irvin.pos.entities.Tax;
 
 public class ObjectMapper {
@@ -83,4 +87,18 @@ public class ObjectMapper {
     public  static Category dtoToCategory(CategoryDTO categoryDTO, List<Product> product){
         return new Category(categoryDTO.getId(), categoryDTO.getName());
     }
+
+    public static SaleDTO saleToDTO(Sale sale){
+        SaleDTO dto = new SaleDTO(sale.getId(), sale.getItems(),
+                sale.getDate(), sale.getDiscount(), sale.getTotal(),
+                sale.getCashRegister().getId(), sale.getCustomer().getId());
+        return dto;
+    }
+    public static Sale dtoToSale(SaleDTO saleDTO, CashRegister cashRegister, Customer customer){
+        return new Sale(saleDTO.getItems(), saleDTO.getDate(), saleDTO.getDiscount(), saleDTO.getTotal(), cashRegister, customer);
+
+    }
+
+
+
 }

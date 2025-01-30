@@ -33,11 +33,13 @@ public class Sale {
     public Sale(){
     }
 
-    public Sale(List<SaleItem> items, Instant date, int discount, long total ){
+    public Sale(List<SaleItem> items, Instant date, int discount, long total, CashRegister cashRegister, Customer customer){
         this.items = items;
         this.date = date;
         this.discount = discount;
 	this.total = total;
+	this.cashRegister = cashRegister;
+	this.customer = customer;
     }
 
     public Sale(Sale sale){
@@ -75,5 +77,21 @@ public class Sale {
 
 	public void setTotal(long total) {
 		this.total = total;
+	}
+
+	public CashRegister getCashRegister() {
+		return cashRegister;
+	}
+
+	public void setCashRegister(CashRegister cashRegister) {
+		this.cashRegister = cashRegister;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 }

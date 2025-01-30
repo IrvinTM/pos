@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.irvin.pos.dtos.CustomPageDTO;
+import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.entities.Sale;
 import com.irvin.pos.services.SaleService;
 
@@ -32,7 +33,7 @@ public class SaleController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping
-    public CustomPageDTO<Sale> getAllSales(){
+    public CustomPageDTO<SaleDTO> getAllSales(){
         return saleService.getAllSales();
     }
 }
