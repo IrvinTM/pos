@@ -44,11 +44,9 @@ public class TaxService {
     }
 
     public TaxDTO getTaxByID(long id) throws Exception{
-        Tax tax = taxRepository.getReferenceById(id);
-        if (tax != null) {
-            return ObjectMapper.taxToDTO(tax);
-    }
-    throw new Exception("tax not found");
+        //throws entity not found from jakarta-- never null
+    Tax tax = taxRepository.getReferenceById(id);
+        return ObjectMapper.taxToDTO(tax);
     }
 
     public TaxDTO updateTax(TaxDTO taxDTO)throws Exception{

@@ -50,9 +50,6 @@ public class CategoryService {
 
     //TODO create a proper exception
     public CategoryDTO updateCategorie(CategoryDTO categoryDTO){
-        if (categoryRepository.findById(categoryDTO.getId()) == null) {
-            throw new IllegalStateException("Category doesnt exist");
-        }
         Optional<Category> catFromDB = categoryRepository.findById(categoryDTO.getId());
         if(catFromDB.isPresent()){
             Category cat = catFromDB.get();
