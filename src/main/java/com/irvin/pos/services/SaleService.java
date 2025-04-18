@@ -42,9 +42,10 @@ public class SaleService {
         return saleRepository.save(ObjectMapper.dtoToSale(saleDTO, cashRegister.get(), customer.get()));
     }
 
-    public void removeSale(long id){
+    public void deleteSale(long id){
         saleRepository.deleteById(id);
     }
+
     public CustomPageDTO<SaleDTO> getAllSales(){
         Page<Sale> sales = saleRepository.findAll(PageRequest.of(0, 10));
         CustomPageDTO<SaleDTO> salesDTO = new CustomPageDTO<>();

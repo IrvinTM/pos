@@ -30,10 +30,17 @@ public class SaleController {
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Sale> deleteSale(@RequestParam long id){
+        saleService.deleteSale(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping
     public CustomPageDTO<SaleDTO> getAllSales(){
         return saleService.getAllSales();
     }
+    @PostMapping("/edit")
+    public ResponseEntity<Sale> editSale(@RequestBody SaleDTO sale){
+        Sale s = saleService.addSale(sale);
+        return ResponseEntity.ok(s);
+    }
+
 }
