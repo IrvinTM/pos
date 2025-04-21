@@ -24,21 +24,24 @@ public class SaleController {
     private SaleService saleService;
 
     @PostMapping("/create")
-    public ResponseEntity<Sale> addSale(@RequestBody SaleDTO sale){
+    public ResponseEntity<Sale> addSale(@RequestBody SaleDTO sale) {
         Sale s = saleService.addSale(sale);
         return ResponseEntity.ok(s);
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Sale> deleteSale(@RequestParam long id){
+    public ResponseEntity<Sale> deleteSale(@RequestParam long id) {
         saleService.deleteSale(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @GetMapping
-    public CustomPageDTO<SaleDTO> getAllSales(){
+    public CustomPageDTO<SaleDTO> getAllSales() {
         return saleService.getAllSales();
     }
+
     @PostMapping("/edit")
-    public ResponseEntity<Sale> editSale(@RequestBody SaleDTO sale){
+    public ResponseEntity<Sale> editSale(@RequestBody SaleDTO sale) {
         Sale s = saleService.addSale(sale);
         return ResponseEntity.ok(s);
     }

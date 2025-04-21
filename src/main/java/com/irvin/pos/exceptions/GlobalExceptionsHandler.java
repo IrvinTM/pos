@@ -11,14 +11,19 @@ import com.irvin.pos.utils.ApiError;
 @ControllerAdvice
 public class GlobalExceptionsHandler {
 
-    // TODO check the path json response returned by req.getDescription
+        // TODO check the path json response returned by req.getDescription
 
-    @ExceptionHandler(PropertyAlreadyExistException.class)
-    public ResponseEntity<ApiError> handlePropertyAlreadyExistException(PropertyAlreadyExistException e,
-            WebRequest req) {
-        ApiError error = new ApiError(HttpStatus.BAD_REQUEST.value(),
-                e.getMessage(),
-                req.getDescription(false).replace("uri=", ""));
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
+        @ExceptionHandler(PropertyAlreadyExistException.class)
+        public ResponseEntity<ApiError> handlePropertyAlreadyExistEx(PropertyAlreadyExistException e, WebRequest req) {
+                ApiError error = new ApiError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+                                req.getDescription(false).replace("uri=", ""));
+                return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(EntityNotFoundException.class)
+        public ResponseEntity<ApiError> handleEntityNotFoundEx(EntityNotFoundException e, WebRequest req) {
+                ApiError error = new ApiError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+                                req.getDescription(false).replace("uri=", ""));
+                return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
 }
