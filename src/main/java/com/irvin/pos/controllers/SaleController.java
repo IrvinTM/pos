@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.entities.Sale;
+import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.services.SaleService;
 
 @RestController
@@ -24,7 +25,7 @@ public class SaleController {
     private SaleService saleService;
 
     @PostMapping("/create")
-    public ResponseEntity<Sale> addSale(@RequestBody SaleDTO sale) {
+    public ResponseEntity<Sale> addSale(@RequestBody SaleDTO sale) throws EntityNotFoundException {
         Sale s = saleService.addSale(sale);
         return ResponseEntity.ok(s);
     }
@@ -41,7 +42,7 @@ public class SaleController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<Sale> editSale(@RequestBody SaleDTO sale) {
+    public ResponseEntity<Sale> editSale(@RequestBody SaleDTO sale) throws EntityNotFoundException {
         Sale s = saleService.addSale(sale);
         return ResponseEntity.ok(s);
     }
