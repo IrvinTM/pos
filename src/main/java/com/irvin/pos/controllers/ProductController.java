@@ -24,7 +24,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public CustomPageDTO<ProductDTO> getAllProducts() {
         return productService.getAllProducts();
