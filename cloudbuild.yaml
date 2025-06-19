@@ -6,3 +6,6 @@ steps:
   args: ['build', '--tag=gcr.io/$PROJECT_ID/spring-boot', '.']
 
 images: ['gcr.io/$PROJECT_ID/spring-boot']
+
+options:
+  logging: GCS_ONLY
