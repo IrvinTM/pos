@@ -8,4 +8,4 @@ steps:
 images: ['gcr.io/$PROJECT_ID/spring-boot']
 
 options:
-  logging: GCS_ONLY
+  logging: CLOUD_LOGGING_ONLY
