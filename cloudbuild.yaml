@@ -10,7 +10,7 @@ steps:
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'pos-dev', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/pos-dev', '--region', 'us-central1']
+  args: ['run', 'deploy', 'pos-dev', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/pos-dev', '--region', 'us-central1', '--allow-unauthenticated']
 
 images: ['us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/pos-dev']
   
