@@ -5,7 +5,11 @@ steps:
 - name: 'gcr.io/cloud-builders/docker' 
   args: ['build', '--tag=gcr.io/$PROJECT_ID/spring-boot', '.']
 
-images: ['gcr.io/$PROJECT_ID/spring-boot']
+images: ['gcr.io/$PROJECT_ID/pos-dev']
 
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'pos-dev', '--image', 'LOCATION-docker.pkg.dev/imerlos-dev/gcr.io/gcr.io/$PROJECT_ID/pos-dev', '--region', 'us-central1']
+  
 options:
   logging: CLOUD_LOGGING_ONLY
