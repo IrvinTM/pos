@@ -3,7 +3,6 @@ package com.irvin.pos.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import com.irvin.pos.exceptions.PropertyAlreadyExistException;
 import com.irvin.pos.services.ProductService;
 
 @RestController
-@CrossOrigin(origins =  "https://5173-cs-9ec2fbb7-98c4-448b-ad44-567877072fc1.cs-us-west1-vwey.cloudshell.dev/")
 @RequestMapping("/api/products")
 public class ProductController {
 
