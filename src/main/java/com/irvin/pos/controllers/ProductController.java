@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.ProductDTO;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
@@ -24,7 +25,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @CrossOrigin(origins =  "https://5173-cs-9ec2fbb7-98c4-448b-ad44-567877072fc1.cs-us-west1-vwey.cloudshell.dev/")
+    @CrossOrigin(origins =  "https://5173-cs-9ec2fbb7-98c4-448b-ad44-567877072fc1.cs-us-west1-vwey.cloudshell.dev/?authuser=0")
     @GetMapping("/")
     public CustomPageDTO<ProductDTO> getAllProducts() {
         return productService.getAllProducts();
