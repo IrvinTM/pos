@@ -116,4 +116,10 @@ public class ProductService {
         page.setCustomPage(customPage);
         return page;
     }
+
+    public ProductDTO getProductByID(long id){
+        ProductDTO product = ObjectMapper.productToDTO(productRepository.getReferenceById(id));
+        return product;
+    }
+
 }
