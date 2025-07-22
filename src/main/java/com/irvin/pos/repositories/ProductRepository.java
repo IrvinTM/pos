@@ -9,4 +9,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     public Product getByCode(String code);
 
     public Product getByBarCode(String barCode);
+
+
+
 }
