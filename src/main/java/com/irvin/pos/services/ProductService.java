@@ -122,4 +122,9 @@ public class ProductService {
         return product;
     }
 
+    public ProductDTO getProductByBarCode(String barCode){
+        Product product = productRepository.getByBarCode(barCode);
+        return ObjectMapper.productToDTO(product);
+    }
+
 }

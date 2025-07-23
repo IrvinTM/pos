@@ -53,4 +53,10 @@ public class ProductController {
         ProductDTO prod = productService.getProductByID(id);
         return ResponseEntity.ok(prod);
     }
+
+    @GetMapping("/barcode/{barCode}")
+    public ResponseEntity<ProductDTO> getProductByBarCode(@PathVariable String barCode){
+        ProductDTO prod = productService.getProductByBarCode(barCode);
+        return ResponseEntity.ok(prod);
+    }
 }
