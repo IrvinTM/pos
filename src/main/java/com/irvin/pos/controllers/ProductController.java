@@ -1,5 +1,7 @@
 package com.irvin.pos.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,5 +60,11 @@ public class ProductController {
     public ResponseEntity<ProductDTO> getProductByBarCode(@PathVariable String barCode){
         ProductDTO prod = productService.getProductByBarCode(barCode);
         return ResponseEntity.ok(prod);
+    }
+
+    @GetMapping("/search/{name}")
+    public ResponseEntity<List<ProductDTO>> searchProductByName(@PathVariable String name){
+        List<ProductDTO> products = productService.searchByName(name);
+        return ResponseEntity.ok(products);
     }
 }
