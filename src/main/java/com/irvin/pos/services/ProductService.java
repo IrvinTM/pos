@@ -128,7 +128,7 @@ public class ProductService {
     }
 
     public List<ProductDTO> searchByName(String name ){
-        List<Product> products = productRepository.getByContainigName(name);
+        List<Product> products = productRepository.findByNameContainingIgnoreCase(name);
         List<ProductDTO> productsDTO = new ArrayList<>();
         products.forEach(product -> {
             productsDTO.add(ObjectMapper.productToDTO(product));
