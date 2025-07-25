@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.entities.Customer;
+import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.services.CustomerService;
 
 @RestController()
@@ -31,17 +32,17 @@ public class CustomerController {
     }
 
     @GetMapping("/identification/{identification}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable String identification) {
+    public ResponseEntity<Customer> getCustomerById(@PathVariable String identification) throws EntityNotFoundException {
         return ResponseEntity.ok(customerService.getCustomerByIdentification(identification));
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
+    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) throws EntityNotFoundException {
         return ResponseEntity.ok(customerService.getCustomerByEmail(email));
     }
 
     @GetMapping("/phone/{phoneNumber}")
-    public ResponseEntity<Customer> getCustomerByPhoneNumber(@PathVariable String phoneNumber) {
+    public ResponseEntity<Customer> getCustomerByPhoneNumber(@PathVariable String phoneNumber) throws EntityNotFoundException {
         return ResponseEntity.ok(customerService.getCustomerByPhoneNumber(phoneNumber));
     }
 }

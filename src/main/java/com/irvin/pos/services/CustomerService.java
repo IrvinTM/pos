@@ -1,5 +1,7 @@
 package com.irvin.pos.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.entities.Customer;
+import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
 import com.irvin.pos.repositories.CustomerRepository;
 import com.irvin.pos.utils.CustomPage;
+
 
 @Service
 public class CustomerService {
@@ -48,15 +52,27 @@ public class CustomerService {
         return page;
     }
 
-    public Customer getCustomerByIdentification(String identification) {
-        return customerRepository.findByIdentification(identification);
+    public Customer getCustomerByIdentification(String identification) throws EntityNotFoundException {
+        Customer cust = customerRepository.findByIdentification(identification);
+        if (cust == null) {
+            throw new EntityNotFoundException("Customer");
+        }
+        return cust;
     }
 
-    public Customer getCustomerByEmail(String email) {
-        return customerRepository.findByEmail(email);
+    public Customer getCustomerByEmail(String email) throws EntityNotFoundException {
+        Customer cust = customerRepository.findByEmail(email);
+        if(cust == null){
+            throw new EntityNotFoundException("Customer");
+        }
+            return cust;
     }
 
-    public Customer getCustomerByPhoneNumber(String phoneNumber){
-        return customerRepository.findByPhoneNumber(phoneNumber);
+    public Customer getCustomerByPhoneNumber(String phoneNumber) throws EntityNotFoundException {
+        Customer cust =  customerRepository.findByPhoneNumber(phoneNumber);
+        if (cust == null) {
+            throw new EntityNotFoundException("Customer");
+        }
+        return cust;
     }
 }
