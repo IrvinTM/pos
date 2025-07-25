@@ -18,13 +18,13 @@ public class CustomerService {
     CustomerRepository customerRepository;
 
     public Customer createCustomer(Customer customer) throws PropertyAlreadyExistException {
-        if (customerRepository.getByIdentification(customer.getIdentification()) != null
+        if (customerRepository.findByIdentification(customer.getIdentification()) != null
 
         ) {
             throw new PropertyAlreadyExistException("identification", String.valueOf(customer.getIdentification()));
-        } else if (customerRepository.getByPhoneNumber(customer.getPhoneNumber()) != null) {
+        } else if (customerRepository.findByPhoneNumber(customer.getPhoneNumber()) != null) {
             throw new PropertyAlreadyExistException("phone_number", customer.getPhoneNumber());
-        } else if (customerRepository.getByEmail(customer.getEmail()) != null) {
+        } else if (customerRepository.findByEmail(customer.getEmail()) != null) {
             throw new PropertyAlreadyExistException("email", customer.getEmail());
         }
         return customerRepository.save(customer);
@@ -46,5 +46,17 @@ public class CustomerService {
         page.setCustomPage(p);
         page.setContent(peoplePage.getContent());
         return page;
+    }
+
+    public Customer getCustomerByIdentification(String identification) {
+        return customerRepository.findByIdentification(identification);
+    }
+
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
+    public Customer getCustomerByPhoneNumber(String phoneNumber){
+        return customerRepository.findByPhoneNumber(phoneNumber);
     }
 }

@@ -2,7 +2,6 @@ package com.irvin.pos.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.irvin.pos.dtos.CustomPageDTO;

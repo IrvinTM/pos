@@ -3,6 +3,7 @@ package com.irvin.pos.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +28,20 @@ public class CustomerController {
     @PostMapping("/create")
     public Customer creaCustomer(@RequestBody Customer customer) throws Exception {
         return customerService.createCustomer(customer);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable String identification) {
+        return ResponseEntity.ok(customerService.getCustomerByIdentification(identification));
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(customerService.getCustomerByEmail(email));
+    }
+
+    @GetMapping("/phone/{phoneNumber}")
+    public ResponseEntity<Customer> getCustomerByPhoneNumber(@PathVariable String phoneNumber) {
+        return ResponseEntity.ok(customerService.getCustomerByPhoneNumber(phoneNumber));
     }
 }
