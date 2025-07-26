@@ -3,6 +3,7 @@ package com.irvin.pos.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.irvin.pos.dtos.CashRegisterDTO;
 import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.ProductDTO;
 import com.irvin.pos.dtos.SaleDTO;
@@ -37,7 +38,7 @@ public class ObjectMapper {
         return product;
     }
 
-    public static ProductDTO productToDTO(Product product){
+    public static ProductDTO productToDTO(Product product) {
         List<Long> categories = new ArrayList<>();
         product.getCategories().forEach((category) -> categories.add(category.getId()));
 
@@ -65,7 +66,7 @@ public class ObjectMapper {
         return productDTO;
     }
 
-    public static TaxDTO taxToDTO(Tax tax){
+    public static TaxDTO taxToDTO(Tax tax) {
         TaxDTO dto = new TaxDTO();
         dto.setId(tax.getId());
         dto.setName(tax.getName());
@@ -73,32 +74,42 @@ public class ObjectMapper {
         dto.setPercentage(tax.getPercentage());
         return dto;
     }
-    public static Tax dtoToTax(TaxDTO taxDTO, Tax tax){
+
+    public static Tax dtoToTax(TaxDTO taxDTO, Tax tax) {
         tax.setName(taxDTO.getName());
         tax.setCode(taxDTO.getCode());
         tax.setPercentage(taxDTO.getPercentage());
         return tax;
     }
-    
-    public static CategoryDTO categoryToDTO(Category category){
-    return new CategoryDTO(category.getId(), category.getName());
+
+    public static CategoryDTO categoryToDTO(Category category) {
+        return new CategoryDTO(category.getId(), category.getName());
     }
 
-    public  static Category dtoToCategory(CategoryDTO categoryDTO, List<Product> product){
+    public static Category dtoToCategory(CategoryDTO categoryDTO, List<Product> product) {
         return new Category(categoryDTO.getId(), categoryDTO.getName());
     }
 
-    public static SaleDTO saleToDTO(Sale sale){
+    public static SaleDTO saleToDTO(Sale sale) {
         SaleDTO dto = new SaleDTO(sale.getId(), sale.getItems(),
                 sale.getDate(), sale.getDiscount(), sale.getTotal(),
                 sale.getCashRegister().getId(), sale.getCustomer().getId());
         return dto;
     }
-    public static Sale dtoToSale(SaleDTO saleDTO, CashRegister cashRegister, Customer customer){
-        return new Sale(saleDTO.getItems(), saleDTO.getDate(), saleDTO.getDiscount(), saleDTO.getTotal(), cashRegister, customer);
+
+    public static Sale dtoToSale(SaleDTO saleDTO, CashRegister cashRegister, Customer customer) {
+        return new Sale(saleDTO.getItems(), saleDTO.getDate(), saleDTO.getDiscount(), saleDTO.getTotal(), cashRegister,
+                customer);
 
     }
 
-
+    /*
+     * public static CashRegisterDTO cashRegisterToDTO(CashRegister cashRegister) {
+     * CashRegisterDTO cashR = new CashRegisterDTO();
+     * cashR.setBalance(cashRegister.getBalance());
+     * cashR.setSales();
+     * 
+     * }
+     */
 
 }
