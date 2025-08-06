@@ -18,6 +18,9 @@ public class SaleItem {
 	private Product product;
 	private int quantity;
 	private long priceAtSale;
+	@ManyToOne
+	@JoinColumn(name = "sale_id")
+	private Sale sale;
 
 	public long getId() {
 		return id;

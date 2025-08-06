@@ -11,14 +11,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @ElementCollection
-    @CollectionTable(name = "sale_items")
+	@OneToMany(mappedBy = "sale")
     private List<SaleItem> items;
     private Instant date;
     private int discount;
