@@ -2,13 +2,12 @@ package com.irvin.pos.dtos;
 
 import java.time.Instant;
 import java.util.List;
-
 import com.irvin.pos.entities.SaleItem;
 
 public class SaleDTO {
 
     private long id;
-    private List<SaleItem> items;
+    private List<SaleItemDTO> items;
     private Instant date;
     private int discount;
     private long total;
@@ -19,7 +18,7 @@ public class SaleDTO {
 	this.date = Instant.now();
     }
 
-    public SaleDTO(long id, List<SaleItem> items, Instant date, int discount, long total, Long CashRegisterID, Long CostumerID){
+    public SaleDTO(long id, List<SaleItemDTO> items, Instant date, int discount, long total, Long CashRegisterID, Long CostumerID){
 	this.id = id;
 	this.items = items;
 	this.date = Instant.now();
@@ -36,11 +35,11 @@ public class SaleDTO {
 		this.id = id;
 	}
 
-	public List<SaleItem> getItems() {
+	public List<SaleItemDTO> getItems() {
 		return items;
 	}
 
-	public void setItems(List<SaleItem> items) {
+	public void setItems(List<SaleItemDTO> items) {
 		this.items = items;
 	}
 

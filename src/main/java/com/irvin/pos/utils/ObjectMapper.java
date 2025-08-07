@@ -7,6 +7,7 @@ import com.irvin.pos.dtos.CashRegisterDTO;
 import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.ProductDTO;
 import com.irvin.pos.dtos.SaleDTO;
+import com.irvin.pos.dtos.SaleItemDTO;
 import com.irvin.pos.dtos.TaxDTO;
 import com.irvin.pos.entities.CashRegister;
 import com.irvin.pos.entities.Category;
@@ -91,17 +92,22 @@ public class ObjectMapper {
     }
 
     public static SaleDTO saleToDTO(Sale sale) {
-        SaleDTO dto = new SaleDTO(sale.getId(), sale.getItems(),
+        List<SaleItemDTO> items = new ArrayList<SaleItemDTO>();
+        sale.getItems().forEach(item -> items.add(new SaleItemDTO(item.getId(), item.getProduct().getId(), item.getQuantity(), item.getPriceAtSale(), item.getSale().getId())));
+        SaleDTO dto = new SaleDTO(sale.getId(), items,
                 sale.getDate(), sale.getDiscount(), sale.getTotal(),
                 sale.getCashRegister().getId(), sale.getCustomer().getId());
         return dto;
     }
 
-    public static Sale dtoToSale(SaleDTO saleDTO, CashRegister cashRegister, Customer customer) {
-        return new Sale(saleDTO.getItems(), saleDTO.getDate(), saleDTO.getDiscount(), saleDTO.getTotal(), cashRegister,
-                customer);
+    //TODO create dtoToSale and maybe the repositories
 
-    }
+    // public static Sale dtoToSale(SaleDTO saleDTO, CashRegister cashRegister, Customer customer) {
+    //     List<SaleItem> items = 
+    //     return new Sale(saleDTO.getItems(), saleDTO.getDate(), saleDTO.getDiscount(), saleDTO.getTotal(), cashRegister,
+    //             customer);
+
+    // }
 
     /*
      * public static CashRegisterDTO cashRegisterToDTO(CashRegister cashRegister) {

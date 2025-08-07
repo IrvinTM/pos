@@ -43,4 +43,11 @@ public class SaleItem {
 	public void setPriceAtSale(long priceAtSale) {
 		this.priceAtSale = priceAtSale;
 	}
+	public Sale getSale() {
+		return sale;
+	}
+	public void setSale(Sale sale) {
+		this.sale = sale;
+	}
+
 }
