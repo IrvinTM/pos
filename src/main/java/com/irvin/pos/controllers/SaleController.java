@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.SaleDTO;
-import com.irvin.pos.entities.Sale;
 import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.services.SaleService;
 
@@ -25,13 +24,13 @@ public class SaleController {
     private SaleService saleService;
 
     @PostMapping("/create")
-    public ResponseEntity<Sale> addSale(@RequestBody SaleDTO sale) throws EntityNotFoundException {
-        Sale s = saleService.addSale(sale);
+    public ResponseEntity<SaleDTO> addSale(@RequestBody SaleDTO saleDTO) throws EntityNotFoundException {
+        SaleDTO s = saleService.addSale(saleDTO);
         return ResponseEntity.ok(s);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Sale> deleteSale(@RequestParam long id) {
+    public ResponseEntity<SaleDTO> deleteSale(@RequestParam long id) {
         saleService.deleteSale(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -42,8 +41,8 @@ public class SaleController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<Sale> editSale(@RequestBody SaleDTO sale) throws EntityNotFoundException {
-        Sale s = saleService.addSale(sale);
+    public ResponseEntity<SaleDTO> editSale(@RequestBody SaleDTO sale) throws EntityNotFoundException {
+        SaleDTO s = saleService.addSale(sale);
         return ResponseEntity.ok(s);
     }
 

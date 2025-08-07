@@ -31,7 +31,7 @@ public class SaleService {
     private CashRegisterRepository cashRegisterRepository;
 
     // TODO fix exc not being catched by the handler
-    public Sale addSale(SaleDTO saleDTO) throws EntityNotFoundException {
+    public SaleDTO addSale(SaleDTO saleDTO) throws EntityNotFoundException {
         Optional<Customer> customer = customerRepository.findById(saleDTO.getCustomerID());
         if (customer.isEmpty()) {
             throw new EntityNotFoundException("Costumer");
@@ -40,7 +40,7 @@ public class SaleService {
         if (cashRegister.isEmpty()) {
             throw new EntityNotFoundException("Cash Register");
         }
-        return saleRepository.save(ObjectMapper.dtoToSale(saleDTO, cashRegister.get(), customer.get()));
+        return ObjectMapper.saleToDTO(saleRepository.save(ObjectMapper.dtoToSale(saleDTO, cashRegister.get(), customer.get())));
     }
 
     public void deleteSale(long id) {
