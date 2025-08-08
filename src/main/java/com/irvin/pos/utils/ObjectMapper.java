@@ -3,6 +3,8 @@ package com.irvin.pos.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.irvin.pos.dtos.CashRegisterDTO;
 import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.ProductDTO;
@@ -14,9 +16,16 @@ import com.irvin.pos.entities.Category;
 import com.irvin.pos.entities.Customer;
 import com.irvin.pos.entities.Product;
 import com.irvin.pos.entities.Sale;
+import com.irvin.pos.entities.SaleItem;
 import com.irvin.pos.entities.Tax;
+import com.irvin.pos.services.SaleItemService;
 
 public class ObjectMapper {
+
+    @Autowired
+    private SaleItemService saleItemService;
+    
+
 
     public static Product dtoToProduct(ProductDTO productDTO, List<Category> categories, List<Tax> taxes) {
         Product product = new Product();
@@ -101,21 +110,44 @@ public class ObjectMapper {
     }
 
     //TODO create dtoToSale and maybe the repositories
-
     // public static Sale dtoToSale(SaleDTO saleDTO, CashRegister cashRegister, Customer customer) {
-    //     List<SaleItem> items = 
-    //     return new Sale(saleDTO.getItems(), saleDTO.getDate(), saleDTO.getDiscount(), saleDTO.getTotal(), cashRegister,
-    //             customer);
+    //     Sale sale = new Sale();
+    //     sale.setCashRegister(cashRegister);
+    //     sale.setCustomer(customer);
+    //     sale.setDate(saleDTO.getDate());
+    //     sale.setDiscount(saleDTO.getDiscount());
+    //     sale.setTotal(saleDTO.getTotal());
+    //     List<SaleItem> items = new ArrayList<>();
+    //     saleDTO.getItems().forEach(item -> {
+    //         items.add(SaleItemService.findById(item));
+    //     })
+    //     sale.setItems(items);
+    // }
+
+    
+    // public static CashRegisterDTO cashRegisterToDTO(CashRegister cashRegister) {
+    //     CashRegisterDTO cashR = new CashRegisterDTO();
+    //     cashR.setBalance(cashRegister.getBalance());
+    //     cashR.setSales();
+    //  }
+
+    public static SaleItemDTO saleItemToDTO(SaleItem saleItem){
+        SaleItemDTO dto = new SaleItemDTO();
+        dto.setId(saleItem.getId());
+        dto.setPriceAtSale(saleItem.getPriceAtSale());
+        dto.setProductId(saleItem.getProduct().getId());
+        dto.setQuantity(saleItem.getQuantity());
+        dto.setSaleId(saleItem.getSale().getId());
+        return dto;
+    }
+
+    // public static SaleItem dtoToSaleItem (SaleItemDTO saleItemDTO){
+    //     SaleItem item = new SaleItem();
+    //     item.setPriceAtSale(saleItemDTO.getPriceAtSale());
+    //     item.setQuantity(saleItemDTO.getQuantity());
+    //     item.setProduct(saleItemService.findById(saleItemDTO.getProductId()));
 
     // }
 
-    /*
-     * public static CashRegisterDTO cashRegisterToDTO(CashRegister cashRegister) {
-     * CashRegisterDTO cashR = new CashRegisterDTO();
-     * cashR.setBalance(cashRegister.getBalance());
-     * cashR.setSales();
-     * 
-     * }
-     */
 
 }

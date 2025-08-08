@@ -1,5 +1,7 @@
 package com.irvin.pos.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.entities.CashRegister;
 import com.irvin.pos.entities.Customer;
 import com.irvin.pos.entities.Sale;
+import com.irvin.pos.entities.SaleItem;
 import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.repositories.CashRegisterRepository;
 import com.irvin.pos.repositories.CustomerRepository;
@@ -40,8 +43,23 @@ public class SaleService {
         if (cashRegister.isEmpty()) {
             throw new EntityNotFoundException("Cash Register");
         }
-        return ObjectMapper.saleToDTO(saleRepository.save(ObjectMapper.dtoToSale(saleDTO, cashRegister.get(), customer.get())));
-    }
+
+        List<SaleItem> items = new ArrayList<SaleItem>();
+        saleDTO.getItems().forEach((item) -> {
+            SaleItem i = new SaleItem();
+            //TODO convert saleItem DTOS to saleItems
+        });
+
+
+        Sale sale = new Sale();
+        sale.setCashRegister(cashRegister.get());
+        sale.setCustomer(customer.get());
+        sale.setItems();
+
+        saleRepository.save()
+        return 
+
+       }
 
     public void deleteSale(long id) {
         saleRepository.deleteById(id);
