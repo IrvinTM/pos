@@ -17,6 +17,8 @@ import com.irvin.pos.entities.SaleItem;
 import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.repositories.CashRegisterRepository;
 import com.irvin.pos.repositories.CustomerRepository;
+import com.irvin.pos.repositories.ProductRepository;
+import com.irvin.pos.repositories.SaleItemRepository;
 import com.irvin.pos.repositories.SaleRepository;
 import com.irvin.pos.utils.CustomPage;
 import com.irvin.pos.utils.ObjectMapper;
@@ -33,6 +35,13 @@ public class SaleService {
     @Autowired
     private CashRegisterRepository cashRegisterRepository;
 
+    @Autowired
+    private SaleItemRepository saleItemRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+
     // TODO fix exc not being catched by the handler
     public SaleDTO addSale(SaleDTO saleDTO) throws EntityNotFoundException {
         Optional<Customer> customer = customerRepository.findById(saleDTO.getCustomerID());
@@ -48,17 +57,22 @@ public class SaleService {
         saleDTO.getItems().forEach((item) -> {
             SaleItem i = new SaleItem();
             //TODO convert saleItem DTOS to saleItems
+            i.setPriceAtSale(item.getPriceAtSale());
+            i.setProduct(productRepository.findById(item.getProductId()).get());
+            i.setQuantity(item.getQuantity());
+            i.setSale(saleRepository.getReferenceById(item.getId()));
+            items.add(i);
         });
-
 
         Sale sale = new Sale();
         sale.setCashRegister(cashRegister.get());
         sale.setCustomer(customer.get());
-        sale.setItems();
+        sale.setItems(items);
+        sale.setDate(saleDTO.getDate());
+        sale.setDiscount(saleDTO.getDiscount());
+        sale.setTotal(saleDTO.getTotal());
 
-        saleRepository.save()
-        return 
-
+        return ObjectMapper.saleToDTO(saleRepository.save(sale)); 
        }
 
     public void deleteSale(long id) {
