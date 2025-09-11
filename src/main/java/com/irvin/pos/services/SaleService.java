@@ -2,12 +2,14 @@ package com.irvin.pos.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.entities.CashRegister;
@@ -43,7 +45,7 @@ public class SaleService {
 
 
     // TODO fix exc not being catched by the handler
-    public SaleDTO addSale(SaleDTO saleDTO) throws EntityNotFoundException {
+    public SaleDTO addSale(SaleDTO saleDTO) throws EntityNotFoundException, NoSuchElementException {
         Optional<Customer> customer = customerRepository.findById(saleDTO.getCustomerID());
         if (customer.isEmpty()) {
             throw new EntityNotFoundException("Costumer");
