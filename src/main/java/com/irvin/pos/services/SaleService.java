@@ -14,6 +14,7 @@ import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.entities.CashRegister;
 import com.irvin.pos.entities.Customer;
+import com.irvin.pos.entities.Product;
 import com.irvin.pos.entities.Sale;
 import com.irvin.pos.entities.SaleItem;
 import com.irvin.pos.exceptions.EntityNotFoundException;
@@ -45,6 +46,7 @@ public class SaleService {
 
 
     // TODO fix exc not being catched by the handler
+    // TODO 
     public SaleDTO addSale(SaleDTO saleDTO) throws EntityNotFoundException, NoSuchElementException {
         Optional<Customer> customer = customerRepository.findById(saleDTO.getCustomerID());
         if (customer.isEmpty()) {
@@ -56,14 +58,23 @@ public class SaleService {
         }
 
         List<SaleItem> items = new ArrayList<SaleItem>();
-        saleDTO.getItems().forEach((item) -> {
+        saleDTO.getItems().forEach(item -> {
             SaleItem i = new SaleItem();
             //TODO convert saleItem DTOS to saleItems
             i.setPriceAtSale(item.getPriceAtSale());
-            i.setProduct(productRepository.findById(item.getProductId()).get());
+      Product product;
+    try {
+        product = productRepository.findById(item.getProductId())
+          .orElseThrow(() -> new EntityNotFoundException("Product"));
+i.setProduct(product);
             i.setQuantity(item.getQuantity());
             i.setSale(saleRepository.getReferenceById(item.getId()));
             items.add(i);
+    } catch (EntityNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }                                                     
+            
         });
 
         Sale sale = new Sale();
