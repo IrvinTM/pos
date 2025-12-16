@@ -9,7 +9,7 @@ RUN mvn clean package -DskipTests
 
 
 #Run
-FROM openjdk:17-alpine
+FROM openjdk:17
 
 WORKDIR /app
 
