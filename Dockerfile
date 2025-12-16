@@ -9,7 +9,7 @@ RUN mvn clean package -DskipTests
 
 
 #Run
-FROM openjdk:17
+FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
