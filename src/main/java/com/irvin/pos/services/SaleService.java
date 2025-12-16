@@ -48,6 +48,9 @@ public class SaleService {
     // TODO fix exc not being catched by the handler
     // TODO 
     public SaleDTO addSale(SaleDTO saleDTO) throws EntityNotFoundException, NoSuchElementException {
+
+        Sale sale = new Sale();
+
         Optional<Customer> customer = customerRepository.findById(saleDTO.getCustomerID());
         if (customer.isEmpty()) {
             throw new EntityNotFoundException("Costumer");
@@ -62,28 +65,23 @@ public class SaleService {
             SaleItem i = new SaleItem();
             //TODO convert saleItem DTOS to saleItems
             i.setPriceAtSale(item.getPriceAtSale());
-      Product product;
-    try {
-        product = productRepository.findById(item.getProductId())
-          .orElseThrow(() -> new EntityNotFoundException("Product"));
-i.setProduct(product);
-            i.setQuantity(item.getQuantity());
-            i.setSale(saleRepository.getReferenceById(item.getId()));
-            items.add(i);
-    } catch (EntityNotFoundException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }                                                     
-            
-        });
 
-        Sale sale = new Sale();
+            Optional<Product> prodOptional = productRepository.findById(item.getProductId());
+            
+            i.setProduct(prodOptional.orElseThrow(() -> new EntityNotFoundException("Product")));
+            i.setQuantity(item.getQuantity());
+           //i.setSale(saleRepository.getReferenceById(item.getId()));
+            items.add(i);
+        
+        // TODO Auto-generated catch block
         sale.setCashRegister(cashRegister.get());
         sale.setCustomer(customer.get());
         sale.setItems(items);
         sale.setDate(saleDTO.getDate());
         sale.setDiscount(saleDTO.getDiscount());
         sale.setTotal(saleDTO.getTotal());
+           
+        });
 
         return ObjectMapper.saleToDTO(saleRepository.save(sale)); 
        }

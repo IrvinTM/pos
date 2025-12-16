@@ -3,7 +3,7 @@ package com.irvin.pos.exceptions;
 /**
  * EntityNotFoundException
  */
-public class EntityNotFoundException extends Exception {
+public class EntityNotFoundException extends RuntimeException {
 	private String entity;
 
 	public EntityNotFoundException(String entity) {
