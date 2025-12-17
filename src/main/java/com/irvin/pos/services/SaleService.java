@@ -53,7 +53,7 @@ public class SaleService {
 
         Optional<Customer> customer = customerRepository.findById(saleDTO.getCustomerID());
         if (customer.isEmpty()) {
-            throw new EntityNotFoundException("Costumer");
+            throw new EntityNotFoundException("Custosmer");
         }
         Optional<CashRegister> cashRegister = cashRegisterRepository.findById(saleDTO.getCashRegisterID());
         if (cashRegister.isEmpty()) {
@@ -75,17 +75,17 @@ public class SaleService {
            //TODO set date
             items.add(i);
         
-        // TODO Auto-generated catch block
         sale.setCashRegister(cashRegister.get());
         sale.setCustomer(customer.get());
         sale.setItems(items);
-        sale.setDate(saleDTO.getDate());
         sale.setDiscount(saleDTO.getDiscount());
         sale.setTotal(saleDTO.getTotal());
            
         });
 
-        return ObjectMapper.saleToDTO(saleRepository.save(sale)); 
+        Sale sal = saleRepository.save(sale);
+
+        return ObjectMapper.saleToDTO(sal); 
        }
 
     public void deleteSale(long id) {
@@ -93,7 +93,7 @@ public class SaleService {
     }
 
     public CustomPageDTO<SaleDTO> getAllSales() {
-        Page<Sale> sales = saleRepository.findAll(PageRequest.of(0, 10));
+        Page<Sale> sales = saleRepository.findAll(PageRequest.of(0, 100));
         CustomPageDTO<SaleDTO> salesDTO = new CustomPageDTO<>();
         salesDTO.setCustomPage(
                 new CustomPage(sales.getTotalElements(), sales.getTotalPages(),
