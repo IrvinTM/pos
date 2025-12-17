@@ -70,7 +70,7 @@ public class SaleService {
             
             i.setProduct(prodOptional.orElseThrow(() -> new EntityNotFoundException("Product")));
             i.setQuantity(item.getQuantity());
-            i.setSale(saleRepository.getReferenceById(item.getId()));
+            //i.setSale(saleRepository.getReferenceById(item.getId()));
            //
            //TODO set date
             items.add(i);

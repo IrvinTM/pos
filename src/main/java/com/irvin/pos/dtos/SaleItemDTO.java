@@ -7,12 +7,11 @@ public class SaleItemDTO{
 
     public SaleItemDTO(){}
 
-    public SaleItemDTO(long id, long productId, int quantity, long priceAtSale, long saleId ) {
+    public SaleItemDTO(long id, long productId, int quantity, long priceAtSale ) {
         this.id = id;
         this.productId = productId;
         this.quantity = quantity;
         this.priceAtSale = priceAtSale;
-        this.saleId = saleId;
     }
 
     public long getId() {

@@ -102,7 +102,7 @@ public class ObjectMapper {
 
     public static SaleDTO saleToDTO(Sale sale) {
         List<SaleItemDTO> items = new ArrayList<SaleItemDTO>();
-        sale.getItems().forEach(item -> items.add(new SaleItemDTO(item.getId(), item.getProduct().getId(), item.getQuantity(), item.getPriceAtSale(), item.getSale().getId())));
+        sale.getItems().forEach(item -> items.add(new SaleItemDTO(item.getId(), item.getProduct().getId(), item.getQuantity(), item.getPriceAtSale() )));
         SaleDTO dto = new SaleDTO(sale.getId(), items,
                 sale.getDate(), sale.getDiscount(), sale.getTotal(),
                 sale.getCashRegister().getId(), sale.getCustomer().getId());
