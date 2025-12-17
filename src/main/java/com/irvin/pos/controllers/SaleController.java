@@ -24,7 +24,7 @@ public class SaleController {
     private SaleService saleService;
 
     @PostMapping("/create")
-    public ResponseEntity<SaleDTO> addSale(@RequestBody SaleDTO saleDTO) throws EntityNotFoundException {
+    public ResponseEntity<SaleDTO> addSale(@RequestBody SaleDTO saleDTO) {
         SaleDTO s = saleService.addSale(saleDTO);
         return ResponseEntity.ok(s);
     }
@@ -41,7 +41,7 @@ public class SaleController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<SaleDTO> editSale(@RequestBody SaleDTO sale) throws EntityNotFoundException {
+    public ResponseEntity<SaleDTO> editSale(@RequestBody SaleDTO sale) {
         SaleDTO s = saleService.addSale(sale);
         return ResponseEntity.ok(s);
     }

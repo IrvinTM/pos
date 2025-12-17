@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.SaleDTO;
+import com.irvin.pos.dtos.SaleItemDTO;
 import com.irvin.pos.entities.CashRegister;
 import com.irvin.pos.entities.Customer;
 import com.irvin.pos.entities.Product;
@@ -47,46 +48,39 @@ public class SaleService {
 
     // TODO fix exc not being catched by the handler
     // TODO 
-    public SaleDTO addSale(SaleDTO saleDTO) throws EntityNotFoundException, NoSuchElementException {
+    public SaleDTO addSale(SaleDTO saleDTO) {
+        // Find the customer and cash register, or throw an exception if not found
+        Customer customer = customerRepository.findById(saleDTO.getCustomerID())
+                .orElseThrow(() -> new EntityNotFoundException("Customer with ID " + saleDTO.getCustomerID() + " not found."));
+        CashRegister cashRegister = cashRegisterRepository.findById(saleDTO.getCashRegisterID())
+                .orElseThrow(() -> new EntityNotFoundException("Cash Register with ID " + saleDTO.getCashRegisterID() + " not found."));
 
+        // Create and save the Sale entity first
         Sale sale = new Sale();
-
-        Optional<Customer> customer = customerRepository.findById(saleDTO.getCustomerID());
-        if (customer.isEmpty()) {
-            throw new EntityNotFoundException("Custosmer");
-        }
-        Optional<CashRegister> cashRegister = cashRegisterRepository.findById(saleDTO.getCashRegisterID());
-        if (cashRegister.isEmpty()) {
-            throw new EntityNotFoundException("Cash Register");
-        }
-
-        List<SaleItem> items = new ArrayList<SaleItem>();
-        saleDTO.getItems().forEach(item -> {
-            SaleItem i = new SaleItem();
-            //TODO convert saleItem DTOS to saleItems
-            i.setPriceAtSale(item.getPriceAtSale());
-
-            Optional<Product> prodOptional = productRepository.findById(item.getProductId());
-            
-            i.setProduct(prodOptional.orElseThrow(() -> new EntityNotFoundException("Product")));
-            i.setQuantity(item.getQuantity());
-            //i.setSale(saleRepository.getReferenceById(item.getId()));
-           //
-           //TODO set date
-            items.add(i);
-        
-        sale.setCashRegister(cashRegister.get());
-        sale.setCustomer(customer.get());
-        sale.setItems(items);
+        sale.setCustomer(customer);
+        sale.setCashRegister(cashRegister);
         sale.setDiscount(saleDTO.getDiscount());
         sale.setTotal(saleDTO.getTotal());
-           
-        });
+        Sale savedSale = saleRepository.save(sale);
 
-        Sale sal = saleRepository.save(sale);
+        // Create and save SaleItem entities
+        List<SaleItem> items = new ArrayList<>();
+        for (SaleItemDTO itemDTO : saleDTO.getItems()) {
+            Product product = productRepository.findById(itemDTO.getProductId())
+                    .orElseThrow(() -> new EntityNotFoundException("Product with ID " + itemDTO.getProductId() + " not found."));
 
-        return ObjectMapper.saleToDTO(sal); 
-       }
+            SaleItem saleItem = new SaleItem();
+            saleItem.setSale(savedSale); // Associate with the saved Sale
+            saleItem.setProduct(product);
+
+            saleItem.setQuantity(itemDTO.getQuantity());
+            saleItem.setPriceAtSale(itemDTO.getPriceAtSale());
+            items.add(saleItemRepository.save(saleItem)); // Save the SaleItem
+        }
+
+        savedSale.setItems(items);
+        return ObjectMapper.saleToDTO(saleRepository.save(savedSale));
+    }
 
     public void deleteSale(long id) {
         saleRepository.deleteById(id);
