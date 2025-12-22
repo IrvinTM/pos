@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN git clone https://github.com/IrvinTM/pos.git .
 
-RUN mvn clean package -DskipTests
+RUN mvn clean package -Dmaven.test.skip=true
 
 
 #Run
