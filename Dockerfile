@@ -5,8 +5,7 @@ WORKDIR /app
 
 RUN git clone https://github.com/IrvinTM/pos.git .
 
-RUN mvn clean package -Dmaven.test.skip=true
-
+RUN mvn clean package -DskipTests
 
 #Run
 FROM eclipse-temurin:17-jdk
