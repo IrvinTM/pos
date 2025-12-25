@@ -41,7 +41,7 @@ public class SaleController {
         return saleService.getAllSales();
     }
 
-    @GetMapping("/sale/{id}")
+    @GetMapping("/sale/{saleId}")
     public ResponseEntity<SaleDTO> getSaleById(@RequestParam long saleId) {
         return ResponseEntity.ok(saleService.getSaleById(saleId));
     }
