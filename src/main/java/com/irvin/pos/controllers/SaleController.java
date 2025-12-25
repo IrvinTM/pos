@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.SaleDTO;
+import com.irvin.pos.entities.Sale;
 import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.services.SaleService;
 
@@ -38,6 +39,11 @@ public class SaleController {
     @GetMapping
     public CustomPageDTO<SaleDTO> getAllSales() {
         return saleService.getAllSales();
+    }
+
+    @GetMapping("/sale/{id}")
+    public ResponseEntity<SaleDTO> getSaleById(@RequestParam long saleId) {
+        return saleService.getSaleById(saleId);
     }
 
     @PostMapping("/edit")

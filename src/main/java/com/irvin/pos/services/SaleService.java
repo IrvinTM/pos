@@ -45,15 +45,16 @@ public class SaleService {
     @Autowired
     private ProductRepository productRepository;
 
-
     // TODO fix exc not being catched by the handler
-    // TODO 
+    // TODO
     public SaleDTO addSale(SaleDTO saleDTO) {
         // Find the customer and cash register, or throw an exception if not found
         Customer customer = customerRepository.findById(saleDTO.getCustomerID())
-                .orElseThrow(() -> new EntityNotFoundException("Customer with ID " + saleDTO.getCustomerID() + " not found."));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Customer with ID " + saleDTO.getCustomerID() + " not found."));
         CashRegister cashRegister = cashRegisterRepository.findById(saleDTO.getCashRegisterID())
-                .orElseThrow(() -> new EntityNotFoundException("Cash Register with ID " + saleDTO.getCashRegisterID() + " not found."));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Cash Register with ID " + saleDTO.getCashRegisterID() + " not found."));
 
         // Create and save the Sale entity first
         Sale sale = new Sale();
@@ -67,7 +68,8 @@ public class SaleService {
         List<SaleItem> items = new ArrayList<>();
         for (SaleItemDTO itemDTO : saleDTO.getItems()) {
             Product product = productRepository.findById(itemDTO.getProductId())
-                    .orElseThrow(() -> new EntityNotFoundException("Product with ID " + itemDTO.getProductId() + " not found."));
+                    .orElseThrow(() -> new EntityNotFoundException(
+                            "Product with ID " + itemDTO.getProductId() + " not found."));
 
             SaleItem saleItem = new SaleItem();
             saleItem.setSale(savedSale); // Associate with the saved Sale
@@ -84,6 +86,10 @@ public class SaleService {
 
     public void deleteSale(long id) {
         saleRepository.deleteById(id);
+    }
+
+    public SaleDTO getSaleById(long saleId) {
+        return ObjectMapper.saleToDTO(saleRepository.findById(saleId));
     }
 
     public CustomPageDTO<SaleDTO> getAllSales() {
