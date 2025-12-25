@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class SaleController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<SaleDTO> deleteSale(@RequestParam long id) {
+    public ResponseEntity<SaleDTO> deleteSale(@PathVariable long id) {
         saleService.deleteSale(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -42,7 +43,7 @@ public class SaleController {
     }
 
     @GetMapping("/sale/{saleId}")
-    public ResponseEntity<SaleDTO> getSaleById(@RequestParam long saleId) {
+    public ResponseEntity<SaleDTO> getSaleById(@PathVariable long saleId) {
         return ResponseEntity.ok(saleService.getSaleById(saleId));
     }
 
