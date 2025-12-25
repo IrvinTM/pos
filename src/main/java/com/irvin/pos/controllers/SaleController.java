@@ -43,7 +43,7 @@ public class SaleController {
 
     @GetMapping("/sale/{id}")
     public ResponseEntity<SaleDTO> getSaleById(@RequestParam long saleId) {
-        return saleService.getSaleById(saleId);
+        return ResponseEntity.ok(saleService.getSaleById(saleId));
     }
 
     @PostMapping("/edit")

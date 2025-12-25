@@ -89,7 +89,12 @@ public class SaleService {
     }
 
     public SaleDTO getSaleById(long saleId) {
-        return ObjectMapper.saleToDTO(saleRepository.findById(saleId));
+        Optional<Sale> sale = saleRepository.findById(saleId);
+        if (sale.isEmpty()) {
+            throw new EntityNotFoundException("Sale");
+
+        }
+        return ObjectMapper.saleToDTO(sale.get());
     }
 
     public CustomPageDTO<SaleDTO> getAllSales() {
