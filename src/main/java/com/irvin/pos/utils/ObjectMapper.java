@@ -10,6 +10,7 @@ import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.ProductDTO;
 import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.dtos.SaleItemDTO;
+import com.irvin.pos.dtos.SupplierDTO;
 import com.irvin.pos.dtos.TaxDTO;
 import com.irvin.pos.entities.CashRegister;
 import com.irvin.pos.entities.Category;
@@ -139,6 +140,33 @@ public class ObjectMapper {
         dto.setQuantity(saleItem.getQuantity());
         dto.setSaleId(saleItem.getSale().getId());
         return dto;
+    }
+
+    public static SupplierDTO supplierToDTO(com.irvin.pos.entities.Supplier supplier) {
+        List<Long> stockIds = new ArrayList<>();
+        if (supplier.getStocks() != null) {
+            supplier.getStocks().forEach(stock -> stockIds.add(stock.getId()));
+        }
+        return new SupplierDTO(
+                supplier.getId(),
+                supplier.getName(),
+                supplier.getIdentification(),
+                supplier.getAddress(),
+                supplier.getPhoneNumber(),
+                supplier.getEmail(),
+                stockIds
+        );
+    }
+
+    public static com.irvin.pos.entities.Supplier dtoToSupplier(SupplierDTO dto, List<com.irvin.pos.entities.Stock> stocks) {
+        com.irvin.pos.entities.Supplier supplier = new com.irvin.pos.entities.Supplier();
+        supplier.setName(dto.getName());
+        supplier.setIdentification(dto.getIdentification());
+        supplier.setAddress(dto.getAddress());
+        supplier.setPhoneNumber(dto.getPhoneNumber());
+        supplier.setEmail(dto.getEmail());
+        supplier.setStocks(stocks);
+        return supplier;
     }
 
     // public static SaleItem dtoToSaleItem (SaleItemDTO saleItemDTO){
