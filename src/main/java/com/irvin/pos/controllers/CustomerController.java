@@ -45,4 +45,15 @@ public class CustomerController {
     public ResponseEntity<Customer> getCustomerByPhoneNumber(@PathVariable String phoneNumber) throws EntityNotFoundException {
         return ResponseEntity.ok(customerService.getCustomerByPhoneNumber(phoneNumber));
     }
+
+    @org.springframework.web.bind.annotation.PutMapping("/update")
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
+        return ResponseEntity.ok(customerService.updateCustomer(customer));
+    }
+
+    @org.springframework.web.bind.annotation.DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable long id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.ok().build();
+    }
 }
