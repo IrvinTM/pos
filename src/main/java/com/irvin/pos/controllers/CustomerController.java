@@ -51,7 +51,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.updateCustomer(customer));
     }
 
-    @org.springframework.web.bind.annotation.DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.ok().build();
