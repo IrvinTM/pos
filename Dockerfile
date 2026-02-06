@@ -1,4 +1,3 @@
-# Build Stage
 # Using Maven with Eclipse Temurin JDK 25
 FROM maven:3.9-eclipse-temurin-25 AS build
 
