@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToMany;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
     private String name;
     @ManyToMany(mappedBy = "categories")
     private List<Product> products;
@@ -20,12 +20,12 @@ public class Category {
     public Category() {
     }
 
-    public Category(long id, String name) {
+    public Category(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

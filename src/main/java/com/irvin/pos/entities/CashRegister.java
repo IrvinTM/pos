@@ -12,15 +12,15 @@ import jakarta.persistence.OneToMany;
 public class CashRegister {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
-	private long balance;
+	private Long id;
+	private Long balance;
 	@OneToMany(mappedBy = "cashRegister")
 	private List<Transaction> transactions;
 	@OneToMany(mappedBy = "cashRegister")
 	private List<Sale> sales;
 
 
-	public CashRegister(int balance, List<Transaction> transactions, List<Sale> sales) {
+	public CashRegister(Long balance, List<Transaction> transactions, List<Sale> sales) {
 		this.balance = balance;
 		this.transactions = transactions;
 		this.sales = sales;
@@ -34,11 +34,11 @@ public class CashRegister {
 		this.transactions = cashRegister.getTransactions();
 	}
 
-	public long getBalance() {
+	public Long getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(Long balance) {
 		this.balance = balance;
 	}
 
@@ -50,7 +50,7 @@ public class CashRegister {
 		this.transactions = transactions;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

@@ -23,7 +23,7 @@ public class CashRegisterService {
         return cashRegisterRepository.save(cashRegister);
     }
 
-    public CashRegister getCashRegisterById(long id) {
+    public CashRegister getCashRegisterById(Long id) {
         return cashRegisterRepository.getReferenceById(id);
     }
 

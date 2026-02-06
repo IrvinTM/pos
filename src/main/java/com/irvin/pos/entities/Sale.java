@@ -17,12 +17,12 @@ import jakarta.persistence.OneToMany;
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 	@OneToMany(mappedBy = "sale")
     private List<SaleItem> items;
     private Instant date;
     private int discount;
-    private long total;
+    private Long total;
     @ManyToOne
     @JoinColumn(name = "cash_register_id")
     private CashRegister cashRegister;
@@ -33,7 +33,7 @@ public class Sale {
     public Sale(){
     }
 
-    public Sale(List<SaleItem> items, Instant date, int discount, long total, CashRegister cashRegister, Customer customer){
+    public Sale(List<SaleItem> items, Instant date, int discount, Long total, CashRegister cashRegister, Customer customer){
         this.items = items;
         this.date = date;
         this.discount = discount;
@@ -48,7 +48,7 @@ public class Sale {
         this.discount = sale.getDiscount();
     }
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	public List<SaleItem> getItems() {
@@ -71,11 +71,11 @@ public class Sale {
 		this.date = date;
 	}
 
-	public long getTotal() {
+	public Long getTotal() {
 		return total;
 	}
 
-	public void setTotal(long total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 

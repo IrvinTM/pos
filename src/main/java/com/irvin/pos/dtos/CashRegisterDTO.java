@@ -1,11 +1,11 @@
 package com.irvin.pos.dtos;
 
 public class CashRegisterDTO {
-    private long balance;
+    private Long balance;
     private int[] transactions;
     private int[] sales;
 
-    public CashRegisterDTO(long balance, int[] transactions, int[] sales) {
+    public CashRegisterDTO(Long balance, int[] transactions, int[] sales) {
         this.balance = balance;
         this.transactions = transactions;
         this.sales = sales;
@@ -14,11 +14,11 @@ public class CashRegisterDTO {
     public CashRegisterDTO() {
     }
 
-    public long getBalance() {
+    public Long getBalance() {
         return balance;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(Long balance) {
         this.balance = balance;
     }
 

@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToMany;
 public class Tax {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
+	private Long id;
 	private String name;
 	private String code;
 	private int percentage;
@@ -29,7 +29,7 @@ public class Tax {
 		this.products = products;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

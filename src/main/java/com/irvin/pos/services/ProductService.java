@@ -97,7 +97,7 @@ public class ProductService {
             }
     }
 
-    public void deleteProduct(long id) throws IllegalArgumentException {
+    public void deleteProduct(Long id) throws IllegalArgumentException {
         productRepository.deleteById(id);
     }
 
@@ -117,7 +117,7 @@ public class ProductService {
         return page;
     }
 
-    public ProductDTO getProductByID(long id){
+    public ProductDTO getProductByID(Long id){
         ProductDTO product = ObjectMapper.productToDTO(productRepository.getReferenceById(id));
         return product;
     }

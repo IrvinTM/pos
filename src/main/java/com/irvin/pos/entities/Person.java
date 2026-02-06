@@ -1,7 +1,7 @@
 package com.irvin.pos.entities;
 
 public class Person {
-    private long id;
+    private Long id;
     private String name;
     private String identification;
     private String address;
@@ -20,7 +20,7 @@ public class Person {
         this.email = email;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

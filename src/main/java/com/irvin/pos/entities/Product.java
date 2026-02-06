@@ -14,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
     private String name;
     private String code;
     private String barCode;
@@ -26,17 +26,17 @@ public class Product {
     private boolean isAgeRestricted;
     private String description;
     private String image;
-    private long cost;
+    private Long cost;
     @ManyToMany
     @JoinTable(name = "product_taxes", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "tax_id"))
     private List<Tax> taxes;
     private boolean priceIncludesTaxes;
     private boolean allowPriceChange;
-    private long noTaxIncludedPrice;
-    private long taxIncludedPrice;
-    private long profitMargin;
-    private long salesPrice;
-    private long available;
+    private Long noTaxIncludedPrice;
+    private Long taxIncludedPrice;
+    private Long profitMargin;
+    private Long salesPrice;
+    private Long available;
     @ManyToOne
     @JoinColumn(name = "stock_id")
     private Stock stock;
@@ -44,10 +44,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, String name, String code, String barCode, String measurementUnit, List<Category> categories,
-            boolean isActive, boolean isAgeRestricted, String description, String image, long cost, List<Tax> taxes,
-            boolean priceIncludesTaxes, boolean allowPriceChange, long noTaxIncludedPrice, long taxIncludedPrice,
-            long profitMargin, long salesPrice, long available) {
+    public Product(Long id, String name, String code, String barCode, String measurementUnit, List<Category> categories,
+            boolean isActive, boolean isAgeRestricted, String description, String image, Long cost, List<Tax> taxes,
+            boolean priceIncludesTaxes, boolean allowPriceChange, Long noTaxIncludedPrice, Long taxIncludedPrice,
+            Long profitMargin, Long salesPrice, Long available) {
         this.id = id;
         this.name = name;
         this.code = code;
@@ -66,7 +66,7 @@ public class Product {
         this.taxIncludedPrice = taxIncludedPrice;
         this.profitMargin = profitMargin;
         this.salesPrice = salesPrice;
-        this.available = 0;
+        this.available = 0L;
     }
 
     public Product(Product product) {
@@ -87,10 +87,10 @@ public class Product {
         this.taxIncludedPrice = product.getTaxIncludedPrice();
         this.profitMargin = product.getProfitMargin();
         this.salesPrice = product.getSalesPrice();
-        this.available = 0;
+        this.available = 0L;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -130,7 +130,7 @@ public class Product {
         return image;
     }
 
-    public long getCost() {
+    public Long getCost() {
         return cost;
     }
 
@@ -146,23 +146,23 @@ public class Product {
         return allowPriceChange;
     }
 
-    public long getNoTaxIncludedPrice() {
+    public Long getNoTaxIncludedPrice() {
         return noTaxIncludedPrice;
     }
 
-    public long getTaxIncludedPrice() {
+    public Long getTaxIncludedPrice() {
         return taxIncludedPrice;
     }
 
-    public long getProfitMargin() {
+    public Long getProfitMargin() {
         return profitMargin;
     }
 
-    public long getSalesPrice() {
+    public Long getSalesPrice() {
         return salesPrice;
     }
 
-    public long getAvailable() {
+    public Long getAvailable() {
         return available;
     }
 
@@ -202,7 +202,7 @@ public class Product {
         this.image = image;
     }
 
-    public void setCost(long cost) {
+    public void setCost(Long cost) {
         this.cost = cost;
     }
 
@@ -218,23 +218,23 @@ public class Product {
         this.allowPriceChange = allowPriceChange;
     }
 
-    public void setNoTaxIncludedPrice(long noTaxIncludedPrice) {
+    public void setNoTaxIncludedPrice(Long noTaxIncludedPrice) {
         this.noTaxIncludedPrice = noTaxIncludedPrice;
     }
 
-    public void setTaxIncludedPrice(long taxIncludedPrice) {
+    public void setTaxIncludedPrice(Long taxIncludedPrice) {
         this.taxIncludedPrice = taxIncludedPrice;
     }
 
-    public void setProfitMargin(long profitMargin) {
+    public void setProfitMargin(Long profitMargin) {
         this.profitMargin = profitMargin;
     }
 
-    public void setSalesPrice(long salesPrice) {
+    public void setSalesPrice(Long salesPrice) {
         this.salesPrice = salesPrice;
     }
 
-    public void setStock(long available) {
+    public void setStock(Long available) {
         this.available = available;
     }
 
@@ -246,7 +246,7 @@ public class Product {
 		return allowPriceChange;
 	}
 
-	public void setAvailable(long available) {
+	public void setAvailable(Long available) {
 		this.available = available;
 	}
 

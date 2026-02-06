@@ -59,7 +59,7 @@ public class CategoryService {
         throw new IllegalStateException("Category doesnt exist");
     }
 
-    public void deleteCategory(long id){
+    public void deleteCategory(Long id){
         categoryRepository.deleteById(id);
     }
 

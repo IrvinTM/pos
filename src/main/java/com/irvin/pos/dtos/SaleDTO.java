@@ -6,19 +6,19 @@ import com.irvin.pos.entities.SaleItem;
 
 public class SaleDTO {
 
-    private long id;
+    private Long id;
     private List<SaleItemDTO> items;
     private Instant date;
     private int discount;
-    private long total;
-    private long cashRegisterID;
+    private Long total;
+    private Long cashRegisterID;
     private Long customerID;
 
     public SaleDTO(){
 	this.date = Instant.now();
     }
 
-    public SaleDTO(long id, List<SaleItemDTO> items, Instant date, int discount, long total, Long CashRegisterID, Long CostumerID){
+    public SaleDTO(Long id, List<SaleItemDTO> items, Instant date, int discount, Long total, Long CashRegisterID, Long CostumerID){
 	this.id = id;
 	this.items = items;
 	this.date = Instant.now();
@@ -27,11 +27,11 @@ public class SaleDTO {
 	this.cashRegisterID = CashRegisterID;
 	this.customerID = CostumerID;
     }
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -59,11 +59,11 @@ public class SaleDTO {
 		this.discount = discount;
 	}
 
-	public long getTotal() {
+	public Long getTotal() {
 		return total;
 	}
 
-	public void setTotal(long total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 

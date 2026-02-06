@@ -2,40 +2,40 @@ package com.irvin.pos.dtos;
 
 public class SaleItemDTO{
 
-    private long id, productId, priceAtSale, saleId;
+    private Long id, productId, priceAtSale, saleId;
     private int quantity;
 
     public SaleItemDTO(){}
 
-    public SaleItemDTO(long id, long productId, int quantity, long priceAtSale ) {
+    public SaleItemDTO(Long id, Long productId, int quantity, Long priceAtSale ) {
         this.id = id;
         this.productId = productId;
         this.quantity = quantity;
         this.priceAtSale = priceAtSale;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
-    public long getPriceAtSale() {
+    public Long getPriceAtSale() {
         return priceAtSale;
     }
-    public void setPriceAtSale(long priceAtSale) {
+    public void setPriceAtSale(Long priceAtSale) {
         this.priceAtSale = priceAtSale;
     }
-    public long getSaleId() {
+    public Long getSaleId() {
         return saleId;
     }
-    public void setSaleId(long saleId) {
+    public void setSaleId(Long saleId) {
         this.saleId = saleId;
     }
     public int getQuantity() {

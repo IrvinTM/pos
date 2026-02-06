@@ -6,7 +6,7 @@ public class CustomPage {
     int totalPages;
     int number;
     int size;
-    public CustomPage(long totalElements, int totalPages, int number, int size){
+    public CustomPage(Long totalElements, int totalPages, int number, int size){
         this.totalElements = totalElements;
         this.totalPages = totalPages;
         this.number = number;

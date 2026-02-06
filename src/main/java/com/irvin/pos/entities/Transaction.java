@@ -13,8 +13,8 @@ import jakarta.persistence.ManyToOne;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
-    private long amount;
+    private Long id;
+    private Long amount;
     private Instant date;
     private TransactionType transactionType;
     @ManyToOne
@@ -24,20 +24,20 @@ public class Transaction {
     public Transaction(){
 
     }
-    public Transaction(long amount,  TransactionType transactionType, CashRegister cashRegister){
+    public Transaction(Long amount,  TransactionType transactionType, CashRegister cashRegister){
 	this.amount = amount;
 	this.date = Instant.now();
 	this.transactionType = transactionType;
 	this.cashRegister = cashRegister;
     }
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public long getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 	public Instant getDate() {

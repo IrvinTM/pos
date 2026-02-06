@@ -38,7 +38,7 @@ public class SupplierController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteSupplier(@PathVariable long id) {
+    public ResponseEntity<?> deleteSupplier(@PathVariable Long id) {
         supplierService.deleteSupplier(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -50,7 +50,7 @@ public class SupplierController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SupplierDTO> getSupplierById(@PathVariable long id) {
+    public ResponseEntity<SupplierDTO> getSupplierById(@PathVariable Long id) {
         SupplierDTO supplier = supplierService.getSupplierById(id);
         return ResponseEntity.ok(supplier);
     }

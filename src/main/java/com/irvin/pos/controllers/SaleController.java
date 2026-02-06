@@ -32,7 +32,7 @@ public class SaleController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<SaleDTO> deleteSale(@PathVariable long id) {
+    public ResponseEntity<SaleDTO> deleteSale(@PathVariable Long id) {
         saleService.deleteSale(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -43,7 +43,7 @@ public class SaleController {
     }
 
     @GetMapping("/sale/{saleId}")
-    public ResponseEntity<SaleDTO> getSaleById(@PathVariable long saleId) {
+    public ResponseEntity<SaleDTO> getSaleById(@PathVariable Long saleId) {
         return ResponseEntity.ok(saleService.getSaleById(saleId));
     }
 

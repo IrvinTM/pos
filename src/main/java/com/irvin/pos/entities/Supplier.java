@@ -12,7 +12,7 @@ public class Supplier{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
     @OneToMany(mappedBy = "supplier")
     private List<Stock> stocks;
     private String name, identification, address, phoneNumber, email;
@@ -33,7 +33,7 @@ public class Supplier{
     public void setSales(List<Stock> stocks) {
         this.stocks = stocks;
     }
-    public long getId() {
+    public Long getId() {
         return id;
     }
 	public void setStocks(List<Stock> stocks) {

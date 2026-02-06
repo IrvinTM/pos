@@ -15,15 +15,15 @@ public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
     @OneToMany(mappedBy = "stock")
     private List<Product> products;
-    private long total;
+    private Long total;
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	public List<Product> getProducts() {
@@ -32,10 +32,10 @@ public class Stock {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	public long getTotal() {
+	public Long getTotal() {
 		return total;
 	}
-	public void setTotal(long total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 }

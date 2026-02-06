@@ -84,11 +84,11 @@ public class SaleService {
         return ObjectMapper.saleToDTO(saleRepository.save(savedSale));
     }
 
-    public void deleteSale(long id) {
+    public void deleteSale(Long id) {
         saleRepository.deleteById(id);
     }
 
-    public SaleDTO getSaleById(long saleId) {
+    public SaleDTO getSaleById(Long saleId) {
         Optional<Sale> sale = saleRepository.findById(saleId);
         if (sale.isEmpty()) {
             throw new EntityNotFoundException("Sale");

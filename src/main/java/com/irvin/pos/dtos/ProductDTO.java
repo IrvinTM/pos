@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ProductDTO {
 
-	private long id;
+	private Long id;
     private String name;
     private String code;
     private String barCode;
@@ -14,20 +14,20 @@ public class ProductDTO {
     private boolean isAgeRestricted;
     private String description;
     private String image;
-    private long cost;
+    private Long cost;
     private List<Long> taxes;
     private boolean priceIncludesTaxes;
     private boolean allowPriceChange;
-    private long noTaxIncludedPrice;
-    private long taxIncludedPrice;
-    private long profitMargin;
-    private long salesPrice;
-    private int available;
+    private Long noTaxIncludedPrice;
+    private Long taxIncludedPrice;
+    private Long profitMargin;
+    private Long salesPrice;
+    private Long available;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -84,10 +84,10 @@ public class ProductDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public long getCost() {
+	public Long getCost() {
 		return cost;
 	}
-	public void setCost(long cost) {
+	public void setCost(Long cost) {
 		this.cost = cost;
 	}
 	public List<Long> getTaxes() {
@@ -108,34 +108,34 @@ public class ProductDTO {
 	public void setAllowPriceChange(boolean allowPriceChange) {
 		this.allowPriceChange = allowPriceChange;
 	}
-	public long getNoTaxIncludedPrice() {
+	public Long getNoTaxIncludedPrice() {
 		return noTaxIncludedPrice;
 	}
-	public void setNoTaxIncludedPrice(long noTaxIncludedPrice) {
+	public void setNoTaxIncludedPrice(Long noTaxIncludedPrice) {
 		this.noTaxIncludedPrice = noTaxIncludedPrice;
 	}
-	public long getTaxIncludedPrice() {
+	public Long getTaxIncludedPrice() {
 		return taxIncludedPrice;
 	}
-	public void setTaxIncludedPrice(long taxIncludedPrice) {
+	public void setTaxIncludedPrice(Long taxIncludedPrice) {
 		this.taxIncludedPrice = taxIncludedPrice;
 	}
-	public long getProfitMargin() {
+	public Long getProfitMargin() {
 		return profitMargin;
 	}
-	public void setProfitMargin(long profitMargin) {
+	public void setProfitMargin(Long profitMargin) {
 		this.profitMargin = profitMargin;
 	}
-	public long getSalesPrice() {
+	public Long getSalesPrice() {
 		return salesPrice;
 	}
-	public void setSalesPrice(long salesPrice) {
+	public void setSalesPrice(Long salesPrice) {
 		this.salesPrice = salesPrice;
 	}
-	public int getAvailable() {
+	public Long getAvailable() {
 		return available;
 	}
-	public void setAvailable(int available) {
+	public void setAvailable(Long available) {
 		this.available = available;
 	}
 }

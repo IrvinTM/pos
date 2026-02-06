@@ -4,12 +4,12 @@ import java.util.List;
 
 public class CategoryDTO {
 
-    private long id;
+    private Long id;
     private String name;
     private List<Long> productIDs;
 
     public CategoryDTO(){}
-    public CategoryDTO(long id, String name){
+    public CategoryDTO(Long id, String name){
 	this.id = id;
 	this.name = name;
     }
@@ -18,10 +18,10 @@ public class CategoryDTO {
 	name = categoryDTO.getName();
     }
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {

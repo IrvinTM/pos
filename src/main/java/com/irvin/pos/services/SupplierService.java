@@ -76,7 +76,7 @@ public class SupplierService {
         }
     }
 
-    public void deleteSupplier(long id) {
+    public void deleteSupplier(Long id) {
         supplierRepository.deleteById(id);
     }
 
@@ -96,7 +96,7 @@ public class SupplierService {
         return page;
     }
     
-    public SupplierDTO getSupplierById(long id) {
+    public SupplierDTO getSupplierById(Long id) {
         return ObjectMapper.supplierToDTO(supplierRepository.getReferenceById(id));
     }
 }

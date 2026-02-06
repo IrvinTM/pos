@@ -43,7 +43,7 @@ public class TaxService {
 
     }
 
-    public TaxDTO getTaxByID(long id) throws Exception{
+    public TaxDTO getTaxByID(Long id) throws Exception{
         //throws entity not found from jakarta-- never null
     Tax tax = taxRepository.getReferenceById(id);
         return ObjectMapper.taxToDTO(tax);
@@ -59,7 +59,7 @@ public class TaxService {
             throw new Exception("tax not found");
         }
     }
-    public void deleteTax(long id){
+    public void deleteTax(Long id){
         taxRepository.deleteById(id);
     }
 }

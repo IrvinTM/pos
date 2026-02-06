@@ -3,7 +3,7 @@ package com.irvin.pos.dtos;
 import com.irvin.pos.entities.Customer;
 
 public class CustomerDTO {
-    private long id;
+    private Long id;
     private String name;
     private String identification;
     private String address;
@@ -13,7 +13,7 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
-    public CustomerDTO(long id, String name, String identification, String address, String phoneNumber, String email) {
+    public CustomerDTO(Long id, String name, String identification, String address, String phoneNumber, String email) {
         this.id = id;
         this.name = name;
         this.identification = identification;
@@ -43,11 +43,11 @@ public class CustomerDTO {
         return customer;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

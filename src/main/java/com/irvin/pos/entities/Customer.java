@@ -12,7 +12,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
     @OneToMany(mappedBy = "customer")
     private List<Sale> sales;
     private String name, identification, address, phoneNumber, email;
@@ -33,7 +33,7 @@ public class Customer {
     public void setSales(List<Sale> sales) {
         this.sales = sales;
     }
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public String getName() {

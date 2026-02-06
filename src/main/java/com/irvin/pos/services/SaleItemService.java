@@ -31,7 +31,7 @@ public class SaleItemService {
         return ObjectMapper.saleItemToDTO(saleItemRepository.save(saleItem));
     }
 
-    public SaleItemDTO findById(long id){
+    public SaleItemDTO findById(Long id){
         return ObjectMapper.saleItemToDTO(saleItemRepository.findById(id).get());
     }
 }

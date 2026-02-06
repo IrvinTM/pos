@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SupplierDTO {
 
-    private long id;
+    private Long id;
     private String name;
     private String identification;
     private String address;
@@ -15,7 +15,7 @@ public class SupplierDTO {
     public SupplierDTO() {
     }
 
-    public SupplierDTO(long id, String name, String identification, String address, String phoneNumber, String email, List<Long> stocks) {
+    public SupplierDTO(Long id, String name, String identification, String address, String phoneNumber, String email, List<Long> stocks) {
         this.id = id;
         this.name = name;
         this.identification = identification;
@@ -25,11 +25,11 @@ public class SupplierDTO {
         this.stocks = stocks;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

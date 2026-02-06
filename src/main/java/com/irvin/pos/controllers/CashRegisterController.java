@@ -25,7 +25,7 @@ public class CashRegisterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CashRegister> getCashRegisterById(long id) {
+    public ResponseEntity<CashRegister> getCashRegisterById(Long id) {
         return ResponseEntity.ok(cashRegisterService.getCashRegisterById(id));
     }
 

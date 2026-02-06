@@ -32,7 +32,7 @@ public class CompanyService {
         }
     }
 
-    public Company getCompany(long id) {
+    public Company getCompany(Long id) {
         Optional<Company> company = companyRepository.findById(1L);
         if (company.isPresent()) {
             return company.get();

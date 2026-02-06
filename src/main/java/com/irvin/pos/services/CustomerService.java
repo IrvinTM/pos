@@ -49,7 +49,7 @@ public class CustomerService {
         return CustomerDTO.fromEntity(customerRepository.save(existingCustomer));
     }
 
-    public void deleteCustomer(long id) {
+    public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }
 

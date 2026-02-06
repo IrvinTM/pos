@@ -41,7 +41,7 @@ public class TaxController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteTax(@PathVariable long id){
+    public ResponseEntity<?> deleteTax(@PathVariable Long id){
         taxService.deleteTax(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

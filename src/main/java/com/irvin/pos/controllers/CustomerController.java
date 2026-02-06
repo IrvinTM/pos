@@ -49,7 +49,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable long id){
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id){
         return ResponseEntity.ok(customerService.getCustomerById(id));
     }
 
@@ -59,7 +59,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable long id) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.ok().build();
     }

@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Company {
     @Id
-    private long id;
+    private Long id;
     private String name;
     private String address;
     private String phoneNumber;
@@ -15,7 +15,7 @@ public class Company {
 
     // asigno el id ya que solo habra una compania
     public Company(String name, String address, String phoneNumber, String email, String logo) {
-        this.id = 1;
+        this.id = 1L;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -26,7 +26,7 @@ public class Company {
     public Company() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
