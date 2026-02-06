@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +48,12 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getCustomerByPhoneNumber(phoneNumber));
     }
 
-    @org.springframework.web.bind.annotation.PutMapping("/update")
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable long id){
+        return ResponseEntity.ok(customerService.getCustomerById(id));
+    }
+
+    @PutMapping("/update")
     public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customer) throws EntityNotFoundException {
         return ResponseEntity.ok(customerService.updateCustomer(customer));
     }

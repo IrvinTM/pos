@@ -1,6 +1,7 @@
 package com.irvin.pos.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.exceptions.PropertyAlreadyExistException;
 import com.irvin.pos.repositories.CustomerRepository;
 import com.irvin.pos.utils.CustomPage;
+import com.irvin.pos.utils.ObjectMapper;
 
 @Service
 public class CustomerService {
@@ -88,5 +90,13 @@ public class CustomerService {
             throw new EntityNotFoundException("Customer");
         }
         return CustomerDTO.fromEntity(cust);
+    }
+    
+    public CustomerDTO getCustomerById(Long id){
+        Optional<Customer> cust = customerRepository.findById(id); 
+        if(cust.get() == null){
+            throw new EntityNotFoundException("Customer");
+        }
+        return CustomerDTO.fromEntity(cust.get());
     }
 }
