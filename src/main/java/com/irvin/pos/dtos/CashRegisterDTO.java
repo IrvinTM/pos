@@ -1,14 +1,28 @@
 package com.irvin.pos.dtos;
 
+import java.util.ArrayList;
+
+import com.irvin.pos.entities.CashRegister;
+
 public class CashRegisterDTO {
     private Long balance;
-    private int[] transactions;
-    private int[] sales;
+    private Long[] transactions;
+    private Long[] sales;
 
-    public CashRegisterDTO(Long balance, int[] transactions, int[] sales) {
+    public CashRegisterDTO(Long balance, Long[] transactions, Long[] sales) {
         this.balance = balance;
         this.transactions = transactions;
         this.sales = sales;
+    }
+
+    public static CashRegisterDTO fromEntity(CashRegister cashRegister) {
+        ArrayList<Long> sales = new ArrayList<Long>();
+        ArrayList<Long> transactions = new ArrayList<Long>();
+        CashRegisterDTO cr = new CashRegisterDTO();
+        cr.setBalance(cashRegister.getBalance());
+        cashRegister.getSales().forEach(sale -> sales.add(sale.getId()));
+        cashRegister.getTransactions().forEach(t -> transactions.add(t.getId()));
+        return cr;
     }
 
     public CashRegisterDTO() {
@@ -22,19 +36,19 @@ public class CashRegisterDTO {
         this.balance = balance;
     }
 
-    public int[] getTransactions() {
+    public Long[] getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(int[] transactions) {
+    public void setTransactions(Long[] transactions) {
         this.transactions = transactions;
     }
 
-    public int[] getSales() {
+    public Long[] getSales() {
         return sales;
     }
 
-    public void setSales(int[] sales) {
+    public void setSales(Long[] sales) {
         this.sales = sales;
     }
 
