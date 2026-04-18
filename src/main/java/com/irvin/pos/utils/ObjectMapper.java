@@ -10,6 +10,7 @@ import com.irvin.pos.dtos.CategoryDTO;
 import com.irvin.pos.dtos.ProductDTO;
 import com.irvin.pos.dtos.SaleDTO;
 import com.irvin.pos.dtos.SaleItemDTO;
+import com.irvin.pos.dtos.SupplierDTO;
 import com.irvin.pos.dtos.TaxDTO;
 import com.irvin.pos.entities.CashRegister;
 import com.irvin.pos.entities.Category;
@@ -17,6 +18,7 @@ import com.irvin.pos.entities.Customer;
 import com.irvin.pos.entities.Product;
 import com.irvin.pos.entities.Sale;
 import com.irvin.pos.entities.SaleItem;
+import com.irvin.pos.entities.Supplier;
 import com.irvin.pos.entities.Tax;
 import com.irvin.pos.services.SaleItemService;
 
@@ -43,8 +45,10 @@ public class ObjectMapper {
         product.setPriceIncludesTaxes(productDTO.isPriceIncludesTaxes());
         product.setAllowPriceChange(productDTO.isAllowPriceChange());
         product.setNoTaxIncludedPrice(productDTO.getNoTaxIncludedPrice());
+        product.setTaxIncludedPrice(productDTO.getTaxIncludedPrice());
         product.setProfitMargin(productDTO.getProfitMargin());
         product.setSalesPrice(productDTO.getSalesPrice());
+        product.setAvailable(productDTO.getAvailable());
         return product;
     }
 
@@ -71,8 +75,10 @@ public class ObjectMapper {
         productDTO.setPriceIncludesTaxes(product.priceIncludesTaxes());
         productDTO.setAllowPriceChange(product.allowPriceChange());
         productDTO.setNoTaxIncludedPrice(product.getNoTaxIncludedPrice());
+        productDTO.setTaxIncludedPrice(product.getTaxIncludedPrice());
         productDTO.setProfitMargin(product.getProfitMargin());
         productDTO.setSalesPrice(product.getSalesPrice());
+        productDTO.setAvailable((int) product.getAvailable());
         return productDTO;
     }
 
@@ -103,9 +109,10 @@ public class ObjectMapper {
     public static SaleDTO saleToDTO(Sale sale) {
         List<SaleItemDTO> items = new ArrayList<SaleItemDTO>();
         sale.getItems().forEach(item -> items.add(new SaleItemDTO(item.getId(), item.getProduct().getId(), item.getQuantity(), item.getPriceAtSale() )));
+        Long customerId = sale.getCustomer() == null ? null : sale.getCustomer().getId();
         SaleDTO dto = new SaleDTO(sale.getId(), items,
                 sale.getDate(), sale.getDiscount(), sale.getTotal(),
-                sale.getCashRegister().getId(), sale.getCustomer().getId());
+                sale.getCashRegister().getId(), customerId);
         return dto;
     }
 
@@ -126,10 +133,14 @@ public class ObjectMapper {
 
     
     // public static CashRegisterDTO cashRegisterToDTO(CashRegister cashRegister) {
-    //     CashRegisterDTO cashR = new CashRegisterDTO();
-    //     cashR.setBalance(cashRegister.getBalance());
-    //     cashR.setSales();
-    //  }
+    public static CashRegisterDTO cashRegisterToDTO(CashRegister cashRegister) {
+        CashRegisterDTO dto = new CashRegisterDTO();
+        dto.setId(cashRegister.getId());
+        dto.setBalance(cashRegister.getBalance());
+        dto.setTransactionCount(cashRegister.getTransactions() == null ? 0 : cashRegister.getTransactions().size());
+        dto.setSaleCount(cashRegister.getSales() == null ? 0 : cashRegister.getSales().size());
+        return dto;
+     }
 
     public static SaleItemDTO saleItemToDTO(SaleItem saleItem){
         SaleItemDTO dto = new SaleItemDTO();
@@ -148,6 +159,26 @@ public class ObjectMapper {
     //     item.setProduct(saleItemService.findById(saleItemDTO.getProductId()));
 
     // }
+
+    public static SupplierDTO supplierToDTO(Supplier supplier) {
+        SupplierDTO dto = new SupplierDTO();
+        dto.setId(supplier.getId());
+        dto.setName(supplier.getName());
+        dto.setIdentification(supplier.getIdentification());
+        dto.setAddress(supplier.getAddress());
+        dto.setPhoneNumber(supplier.getPhoneNumber());
+        dto.setEmail(supplier.getEmail());
+        return dto;
+    }
+
+    public static Supplier dtoToSupplier(SupplierDTO supplierDTO, Supplier supplier) {
+        supplier.setName(supplierDTO.getName());
+        supplier.setIdentification(supplierDTO.getIdentification());
+        supplier.setAddress(supplierDTO.getAddress());
+        supplier.setPhoneNumber(supplierDTO.getPhoneNumber());
+        supplier.setEmail(supplierDTO.getEmail());
+        return supplier;
+    }
 
 
 }

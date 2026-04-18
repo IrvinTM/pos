@@ -1,17 +1,27 @@
 package com.irvin.pos.dtos;
 
 public class CashRegisterDTO {
+    private long id;
     private long balance;
-    private int[] transactions;
-    private int[] sales;
+    private int transactionCount;
+    private int saleCount;
 
-    public CashRegisterDTO(long balance, int[] transactions, int[] sales) {
+    public CashRegisterDTO(long id, long balance, int transactionCount, int saleCount) {
+        this.id = id;
         this.balance = balance;
-        this.transactions = transactions;
-        this.sales = sales;
+        this.transactionCount = transactionCount;
+        this.saleCount = saleCount;
     }
 
     public CashRegisterDTO() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getBalance() {
@@ -22,20 +32,20 @@ public class CashRegisterDTO {
         this.balance = balance;
     }
 
-    public int[] getTransactions() {
-        return transactions;
+    public int getTransactionCount() {
+        return transactionCount;
     }
 
-    public void setTransactions(int[] transactions) {
-        this.transactions = transactions;
+    public void setTransactionCount(int transactionCount) {
+        this.transactionCount = transactionCount;
     }
 
-    public int[] getSales() {
-        return sales;
+    public int getSaleCount() {
+        return saleCount;
     }
 
-    public void setSales(int[] sales) {
-        this.sales = sales;
+    public void setSaleCount(int saleCount) {
+        this.saleCount = saleCount;
     }
 
 }

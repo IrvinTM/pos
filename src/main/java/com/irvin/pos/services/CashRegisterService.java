@@ -5,10 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.irvin.pos.dtos.CashRegisterDTO;
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.entities.CashRegister;
+import com.irvin.pos.exceptions.EntityNotFoundException;
 import com.irvin.pos.repositories.CashRegisterRepository;
 import com.irvin.pos.utils.CustomPage;
+import com.irvin.pos.utils.ObjectMapper;
 
 /**
  * CashRegisterService
@@ -19,19 +22,23 @@ public class CashRegisterService {
     @Autowired
     private CashRegisterRepository cashRegisterRepository;
 
-    public CashRegister createCashRegister(CashRegister cashRegister) {
-        return cashRegisterRepository.save(cashRegister);
+    public CashRegisterDTO createCashRegister(CashRegisterDTO cashRegisterDTO) {
+        CashRegister cashRegister = new CashRegister();
+        cashRegister.setBalance((int) cashRegisterDTO.getBalance());
+        return ObjectMapper.cashRegisterToDTO(cashRegisterRepository.save(cashRegister));
     }
 
-    public CashRegister getCashRegisterById(long id) {
-        return cashRegisterRepository.getReferenceById(id);
+    public CashRegisterDTO getCashRegisterById(long id) {
+        CashRegister cashRegister = cashRegisterRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cash register with id " + id));
+        return ObjectMapper.cashRegisterToDTO(cashRegister);
     }
 
-    public CustomPageDTO<CashRegister> getAllCashRegister() {
-        CustomPageDTO<CashRegister> page = new CustomPageDTO<>();
+    public CustomPageDTO<CashRegisterDTO> getAllCashRegister() {
+        CustomPageDTO<CashRegisterDTO> page = new CustomPageDTO<>();
         Page<CashRegister> p = cashRegisterRepository.findAll(PageRequest.of(0, 10));
         CustomPage customPage = new CustomPage(p.getTotalElements(), p.getTotalPages(), p.getNumber(), p.getSize());
-        page.setContent(p.getContent());
+        p.forEach(cashRegister -> page.addContent(ObjectMapper.cashRegisterToDTO(cashRegister)));
         page.setCustomPage(customPage);
         return page;
     }

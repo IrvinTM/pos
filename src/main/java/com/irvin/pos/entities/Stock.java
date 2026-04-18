@@ -38,4 +38,12 @@ public class Stock {
 	public void setTotal(long total) {
 		this.total = total;
 	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
 }

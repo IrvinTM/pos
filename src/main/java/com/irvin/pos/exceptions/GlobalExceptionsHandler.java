@@ -26,4 +26,11 @@ public class GlobalExceptionsHandler {
                                 req.getDescription(false).replace("uri=", ""));
                 return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
+
+        @ExceptionHandler({ IllegalArgumentException.class, IllegalStateException.class })
+        public ResponseEntity<ApiError> handleBusinessRulesExceptions(RuntimeException e, WebRequest req) {
+                ApiError error = new ApiError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+                                req.getDescription(false).replace("uri=", ""));
+                return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
 }

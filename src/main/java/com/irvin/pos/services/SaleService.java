@@ -48,10 +48,13 @@ public class SaleService {
     // TODO fix exc not being catched by the handler
     // TODO
     public SaleDTO addSale(SaleDTO saleDTO) {
-        // Find the customer and cash register, or throw an exception if not found
-        Customer customer = customerRepository.findById(saleDTO.getCustomerID())
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Customer with ID " + saleDTO.getCustomerID() + " not found."));
+        // Find customer if provided, anonymous sales can have null customer
+        Customer customer = null;
+        if (saleDTO.getCustomerID() != null) {
+            customer = customerRepository.findById(saleDTO.getCustomerID())
+                    .orElseThrow(() -> new EntityNotFoundException(
+                            "Customer with ID " + saleDTO.getCustomerID() + " not found."));
+        }
         CashRegister cashRegister = cashRegisterRepository.findById(saleDTO.getCashRegisterID())
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Cash Register with ID " + saleDTO.getCashRegisterID() + " not found."));
@@ -70,6 +73,13 @@ public class SaleService {
             Product product = productRepository.findById(itemDTO.getProductId())
                     .orElseThrow(() -> new EntityNotFoundException(
                             "Product with ID " + itemDTO.getProductId() + " not found."));
+
+            if (product.getAvailable() < itemDTO.getQuantity()) {
+                throw new IllegalStateException("Product with ID " + itemDTO.getProductId() + " does not have enough stock.");
+            }
+
+            product.setAvailable(product.getAvailable() - itemDTO.getQuantity());
+            productRepository.save(product);
 
             SaleItem saleItem = new SaleItem();
             saleItem.setSale(savedSale); // Associate with the saved Sale
