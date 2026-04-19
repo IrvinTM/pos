@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.irvin.pos.dtos.AddStockDTO;
 import com.irvin.pos.entities.Product;
@@ -34,6 +35,7 @@ public class StockService {
         return stockRepository.findAll(PageRequest.of(0, 10));
     }
 
+    @Transactional
     public Product addStock(AddStockDTO addStockDTO) {
         if (addStockDTO.getQuantity() <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than zero.");
