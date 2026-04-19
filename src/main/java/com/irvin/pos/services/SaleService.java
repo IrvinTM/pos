@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.irvin.pos.dtos.CustomPageDTO;
 import com.irvin.pos.dtos.SaleDTO;
@@ -47,6 +48,7 @@ public class SaleService {
 
     // TODO fix exc not being catched by the handler
     // TODO
+    @Transactional
     public SaleDTO addSale(SaleDTO saleDTO) {
         // Find customer if provided, anonymous sales can have null customer
         Customer customer = null;
