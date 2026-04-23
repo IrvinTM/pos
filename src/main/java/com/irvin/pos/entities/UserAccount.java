@@ -1,6 +1,7 @@
 package com.irvin.pos.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,8 @@ public class UserAccount {
     private String password;
 
     @Column(nullable = false)
-    private String role;
+    @Convert(converter = UserRoleConverter.class)
+    private UserRole role;
 
     private String name;
     private String email;
@@ -33,7 +35,7 @@ public class UserAccount {
     public UserAccount() {
     }
 
-    public UserAccount(String username, String password, String role, String name, String email, boolean enabled) {
+    public UserAccount(String username, String password, UserRole role, String name, String email, boolean enabled) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -62,11 +64,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

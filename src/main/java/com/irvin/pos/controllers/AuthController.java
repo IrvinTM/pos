@@ -3,6 +3,7 @@ package com.irvin.pos.controllers;
 import com.irvin.pos.dtos.LoginRequestDTO;
 import com.irvin.pos.dtos.LoginResponseDTO;
 import com.irvin.pos.entities.UserAccount;
+import com.irvin.pos.entities.UserRole;
 import com.irvin.pos.repositories.UserAccountRepository;
 import jakarta.validation.Valid;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,6 +48,7 @@ public class AuthController {
 
         String name = request.username();
         String email = request.username();
+        UserRole role = UserRole.CAJERO;
 
         Object principal = authentication.getPrincipal();
         if (principal instanceof UserDetails userDetails) {
@@ -56,6 +58,7 @@ public class AuthController {
             if (account != null) {
                 name = account.getName() != null ? account.getName() : principalUsername;
                 email = account.getEmail() != null ? account.getEmail() : principalUsername;
+                role = account.getRole() != null ? account.getRole() : UserRole.CAJERO;
             } else {
                 name = principalUsername;
                 email = principalUsername;
@@ -63,22 +66,23 @@ public class AuthController {
         }
 
         String token = UUID.randomUUID().toString();
-        return new LoginResponseDTO(token, name, email);
+        return new LoginResponseDTO(token, name, email, role.name());
     }
 
     @GetMapping("/me")
     public LoginResponseDTO me(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
-            return new LoginResponseDTO("", "", "");
+            return new LoginResponseDTO("", "", "", "");
         }
 
         String username = authentication.getName();
         UserAccount account = userAccountRepository.findByUsername(username).orElse(null);
 
         if (account == null) {
-            return new LoginResponseDTO("", username, username);
+            return new LoginResponseDTO("", username, username, UserRole.CAJERO.name());
         }
 
-        return new LoginResponseDTO("", account.getName(), account.getEmail());
+        String role = account.getRole() != null ? account.getRole().name() : UserRole.CAJERO.name();
+        return new LoginResponseDTO("", account.getName(), account.getEmail(), role);
     }
 }

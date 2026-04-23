@@ -1,6 +1,7 @@
 package com.irvin.pos.services;
 
 import com.irvin.pos.entities.UserAccount;
+import com.irvin.pos.entities.UserRole;
 import com.irvin.pos.repositories.UserAccountRepository;
 import java.util.List;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,10 +26,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
             .findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        String role = account.getRole();
-        if (role == null || role.isBlank()) {
-            role = "USER";
-        }
+        UserRole role = account.getRole() != null ? account.getRole() : UserRole.CAJERO;
 
         return new User(
             account.getUsername(),
@@ -37,7 +35,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
             true,
             true,
             true,
-            List.of(new SimpleGrantedAuthority("ROLE_" + role))
+            List.of(new SimpleGrantedAuthority("ROLE_" + role.name()))
         );
     }
 }

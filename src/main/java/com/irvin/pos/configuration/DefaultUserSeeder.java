@@ -1,6 +1,7 @@
 package com.irvin.pos.configuration;
 
 import com.irvin.pos.entities.UserAccount;
+import com.irvin.pos.entities.UserRole;
 import com.irvin.pos.repositories.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -27,7 +28,7 @@ public class DefaultUserSeeder {
             UserAccount account = new UserAccount();
             account.setUsername(username);
             account.setPassword(passwordEncoder.encode(password));
-            account.setRole("ADMIN");
+            account.setRole(UserRole.ADMINISTRADOR);
             account.setName(username);
             account.setEmail(username + "@local");
             account.setEnabled(true);
